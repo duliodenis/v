@@ -12,6 +12,7 @@
 		6C4CC5941CBC701C00905D99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5931CBC701C00905D99 /* Assets.xcassets */; };
 		6C4CC5971CBC701C00905D99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5951CBC701C00905D99 /* LaunchScreen.storyboard */; };
 		6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */; };
+		6C5BFF841CBD3BA300AF33FB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BFF831CBD3BA300AF33FB /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6C4CC5961CBC701C00905D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C4CC5981CBC701C00905D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/ChatViewController.swift; sourceTree = "<group>"; };
+		6C5BFF831CBD3BA300AF33FB /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				6C4CC59F1CBC704000905D99 /* Views */,
 				6C4CC59E1CBC703300905D99 /* Controllers */,
+				6C5BFF821CBD3B6C00AF33FB /* Model */,
 				6C4CC5A11CBC704F00905D99 /* Resources */,
 				6C4CC5A01CBC704800905D99 /* Infrastructure */,
 			);
@@ -94,6 +97,14 @@
 				6C4CC5931CBC701C00905D99 /* Assets.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6C5BFF821CBD3B6C00AF33FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C5BFF831CBD3BA300AF33FB /* Message.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5BFF841CBD3BA300AF33FB /* Message.swift in Sources */,
 				6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */,
 				6C4CC58D1CBC701C00905D99 /* AppDelegate.swift in Sources */,
 			);
@@ -318,6 +330,7 @@
 				6C4CC59D1CBC701C00905D99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

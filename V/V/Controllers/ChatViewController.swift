@@ -12,6 +12,9 @@ class ChatViewController: UIViewController {
 
     private let tableView = UITableView()
     
+    private var messages = [Message]()
+    private let cellIdentifier = "Cell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
