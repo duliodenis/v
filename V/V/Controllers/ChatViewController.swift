@@ -18,6 +18,19 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // initial message data for testing
+        for i in 0...10 {
+            let m = Message()
+            m.text = String(i)
+            messages.append(m)
+        }
+        
+        // register the cell identifier of the tableView
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        // set the delegate to the tableView's data source
+        tableView.dataSource = self
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -32,4 +45,22 @@ class ChatViewController: UIViewController {
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
     }
     
+}
+
+
+// MARK: UITableView Data Source Protocol Methods in a ChatViewController Extension
+
+extension ChatViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        
+        let message = messages[indexPath.row]
+        cell.textLabel?.text = message.text
+        
+        return cell
+    }
 }
