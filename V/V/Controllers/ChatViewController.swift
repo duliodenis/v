@@ -25,8 +25,8 @@ class ChatViewController: UIViewController {
             messages.append(m)
         }
         
-        // register the cell identifier of the tableView
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        // register the cell identifier of the tableView and use the Custom ChatCell
+        tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         
         // set the delegate to the tableView's data source
         tableView.dataSource = self
@@ -56,10 +56,10 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatCell
         
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.text
+        cell.messageLabel.text = message.text
         
         return cell
     }
