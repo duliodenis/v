@@ -13,6 +13,9 @@ class ChatCell: UITableViewCell {
     let messageLabel: UILabel = UILabel()
     private let bubbleImageView = UIImageView()
     
+    private var outgoingConstraint: NSLayoutConstraint!
+    private var incomingConstraint: NSLayoutConstraint!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -35,9 +38,12 @@ class ChatCell: UITableViewCell {
         bubbleImageView.widthAnchor.constraintEqualToAnchor(messageLabel.widthAnchor, constant: 50).active = true
         bubbleImageView.heightAnchor.constraintEqualToAnchor(messageLabel.heightAnchor).active = true
         
-        // set the speech bubble's top and trailing anchors to be constrained to the contentView of the cell
+        // set the speech bubble's top anchor to be constrained to the top of the contentView of the cell
         bubbleImageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
-        bubbleImageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor).active = true
+        
+        // set the outgoing and incoming constraints which will be activated based on the message type
+        outgoingConstraint = bubbleImageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor)
+        incomingConstraint = bubbleImageView.leadingAnchor.constraintEqualToAnchor(contentView.leadingAnchor)
         
         // set some specific message label text attributes
         messageLabel.textAlignment = .Center
@@ -45,11 +51,25 @@ class ChatCell: UITableViewCell {
         
         // get the speech bubble image
         let image = UIImage(named: "MessageBubble")?.imageWithRenderingMode(.AlwaysTemplate)
-        bubbleImageView.tintColor = UIColor(red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 1)
+        bubbleImageView.tintColor = UIColor(red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 0.7)
         bubbleImageView.image = image
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // based on the incoming bool parameter activate the appropriate incoming or outgoing constraint
+    
+    func incoming(incoming: Bool) {
+        if incoming {
+            incomingConstraint.active = true
+            outgoingConstraint.active = false
+        } else {
+            incomingConstraint.active = false
+            outgoingConstraint.active = true
+        }
     }
 }
