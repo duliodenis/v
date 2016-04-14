@@ -48,11 +48,6 @@ class ChatCell: UITableViewCell {
         // set some specific message label text attributes
         messageLabel.textAlignment = .Center
         messageLabel.numberOfLines = 0 // use as many lines as it takes
-        
-        // get the speech bubble image
-        let image = UIImage(named: "MessageBubble")?.imageWithRenderingMode(.AlwaysTemplate)
-        bubbleImageView.tintColor = UIColor(red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 0.7)
-        bubbleImageView.image = image
     }
     
     
@@ -67,9 +62,55 @@ class ChatCell: UITableViewCell {
         if incoming {
             incomingConstraint.active = true
             outgoingConstraint.active = false
+            
+            // set the speech bubble image
+            bubbleImageView.image = bubble.incoming
+            
         } else {
             incomingConstraint.active = false
             outgoingConstraint.active = true
+            
+            // set the speech bubble image
+            bubbleImageView.image = bubble.outgoing
         }
     }
+}
+
+
+let bubble = makeBubble()
+
+
+// make an incoming and a outgoing bubble tuple that is a flipped version with different color
+
+func makeBubble() -> (incoming: UIImage, outgoing: UIImage) {
+    let image = UIImage(named: "MessageBubble")!
+    
+    let outgoing = coloredImage(image, red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 0.7)
+    
+    let flippedImage = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.UpMirrored)
+    let incoming = coloredImage(flippedImage, red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha: 0.7)
+    
+    return (incoming, outgoing)
+}
+
+
+func coloredImage(image: UIImage, red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIImage {
+    // create a rectangle to work with
+    let rect = CGRect(origin: CGPointZero, size: image.size)
+    
+    // create a bit-mapped image context in order to create the new image
+    UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+    let context = UIGraphicsGetCurrentContext()
+    // tell the image to draw itself where the rectangle is
+    image.drawInRect(rect)
+    
+    // set the fill color using the passed parameters, blend mode, and fill the rectangle
+    CGContextSetRGBFillColor(context, red, green, blue, alpha)
+    CGContextSetBlendMode(context, CGBlendMode.SourceAtop)
+    CGContextFillRect(context, rect)
+    
+    // capture the image based on the updated context, then release the context, and return the image
+    let result = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return result
 }
