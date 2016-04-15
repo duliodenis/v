@@ -32,8 +32,9 @@ class ChatViewController: UIViewController {
         // register the cell identifier of the tableView and use the Custom ChatCell
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         
-        // set the delegate to the tableView's data source
+        // set to be the delegate to the tableView's data source and delegate methods
         tableView.dataSource = self
+        tableView.delegate = self
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -55,9 +56,11 @@ class ChatViewController: UIViewController {
 // MARK: UITableView Data Source Protocol Methods in a ChatViewController Extension
 
 extension ChatViewController: UITableViewDataSource {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatCell
@@ -68,4 +71,16 @@ extension ChatViewController: UITableViewDataSource {
         
         return cell
     }
+    
+}
+
+
+// MARK: UITableView Delegate Protocol Methods in a ChatViewController Extension
+
+extension ChatViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
 }
