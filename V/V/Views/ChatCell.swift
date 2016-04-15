@@ -85,10 +85,14 @@ let bubble = makeBubble()
 func makeBubble() -> (incoming: UIImage, outgoing: UIImage) {
     let image = UIImage(named: "MessageBubble")!
     
-    let outgoing = coloredImage(image, red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 0.7)
+    // Declare insets for Incoming and Outgoing speech bubbles to correct distortion
+    let insetsIncoming = UIEdgeInsets(top: 17.0, left: 26.5, bottom: 17.5, right: 21.0)
+    let insetsOutgoing = UIEdgeInsets(top: 17.0, left: 21.0, bottom: 17.5, right: 26.5)
+    
+    let outgoing = coloredImage(image, red: 41.0/255.0, green: 128.0/255.0, blue: 185.0/255.0, alpha: 0.7).resizableImageWithCapInsets(insetsOutgoing)
     
     let flippedImage = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: UIImageOrientation.UpMirrored)
-    let incoming = coloredImage(flippedImage, red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha: 0.7)
+    let incoming = coloredImage(flippedImage, red: 229.0/255.0, green: 229.0/255.0, blue: 229.0/255.0, alpha: 0.7).resizableImageWithCapInsets(insetsIncoming)
     
     return (incoming, outgoing)
 }
