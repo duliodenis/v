@@ -36,6 +36,9 @@ class ChatViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        // add an estimated row height
+        tableView.estimatedRowHeight = 44
+        
         // Remove the seperator line from the tableView
         tableView.separatorStyle = .None
         
