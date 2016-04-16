@@ -36,7 +36,7 @@ class ChatCell: UITableViewCell {
         
         // and constraints for the speech bubble's height and width + 50 for the speech bubble handle
         bubbleImageView.widthAnchor.constraintEqualToAnchor(messageLabel.widthAnchor, constant: 50).active = true
-        bubbleImageView.heightAnchor.constraintEqualToAnchor(messageLabel.heightAnchor).active = true
+        bubbleImageView.heightAnchor.constraintEqualToAnchor(messageLabel.heightAnchor, constant: 20).active = true
         
         // set the speech bubble's top and trailing anchors constraints to those of the contentView of the cell with a margin
         bubbleImageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor, constant: 10).active = true
