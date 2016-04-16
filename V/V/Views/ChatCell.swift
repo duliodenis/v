@@ -13,8 +13,8 @@ class ChatCell: UITableViewCell {
     let messageLabel: UILabel = UILabel()
     private let bubbleImageView = UIImageView()
     
-    private var outgoingConstraint: NSLayoutConstraint!
-    private var incomingConstraint: NSLayoutConstraint!
+    private var outgoingConstraints: [NSLayoutConstraint]!
+    private var incomingConstraints: [NSLayoutConstraint]!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,12 +38,21 @@ class ChatCell: UITableViewCell {
         bubbleImageView.widthAnchor.constraintEqualToAnchor(messageLabel.widthAnchor, constant: 50).active = true
         bubbleImageView.heightAnchor.constraintEqualToAnchor(messageLabel.heightAnchor).active = true
         
-        // set the speech bubble's top anchor to be constrained to the top of the contentView of the cell
-        bubbleImageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor).active = true
+        // set the speech bubble's top and trailing anchors constraints to those of the contentView of the cell with a margin
+        bubbleImageView.topAnchor.constraintEqualToAnchor(contentView.topAnchor, constant: 10).active = true
+        bubbleImageView.bottomAnchor.constraintEqualToAnchor(contentView.bottomAnchor, constant: -10).active = true
         
-        // set the outgoing and incoming constraints which will be activated based on the message type
-        outgoingConstraint = bubbleImageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor)
-        incomingConstraint = bubbleImageView.leadingAnchor.constraintEqualToAnchor(contentView.leadingAnchor)
+        // set the outgoing and incoming constraint arrays which will be activated based on the message type
+        // ensuring it doesn't pass over the middle of the contentView of the cell
+        outgoingConstraints = [
+            bubbleImageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor),
+            bubbleImageView.leadingAnchor.constraintGreaterThanOrEqualToAnchor(contentView.centerXAnchor)
+        ]
+        
+        incomingConstraints = [
+            bubbleImageView.trailingAnchor.constraintLessThanOrEqualToAnchor(contentView.centerXAnchor),
+            bubbleImageView.leadingAnchor.constraintEqualToAnchor(contentView.leadingAnchor)
+        ]
         
         // set some specific message label text attributes
         messageLabel.textAlignment = .Center
@@ -60,15 +69,15 @@ class ChatCell: UITableViewCell {
     
     func incoming(incoming: Bool) {
         if incoming {
-            incomingConstraint.active = true
-            outgoingConstraint.active = false
+            NSLayoutConstraint.deactivateConstraints(outgoingConstraints)
+            NSLayoutConstraint.activateConstraints(incomingConstraints)
             
             // set the speech bubble image
             bubbleImageView.image = bubble.incoming
             
         } else {
-            incomingConstraint.active = false
-            outgoingConstraint.active = true
+            NSLayoutConstraint.deactivateConstraints(incomingConstraints)
+            NSLayoutConstraint.activateConstraints(outgoingConstraints)
             
             // set the speech bubble image
             bubbleImageView.image = bubble.outgoing

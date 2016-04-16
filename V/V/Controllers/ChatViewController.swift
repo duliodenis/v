@@ -36,6 +36,9 @@ class ChatViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        // Remove the seperator line from the tableView
+        tableView.separatorStyle = .None
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
