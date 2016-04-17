@@ -103,6 +103,11 @@ class ChatViewController: UIViewController {
         
         // Add an NSNotification Listener for the Keyboard showing
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        
+        // Add single tap gesture recognizer to dismiss keyboard
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer.numberOfTapsRequired = 1 // single tap
+        view.addGestureRecognizer(tapRecognizer)
     }
     
     
@@ -119,6 +124,13 @@ class ChatViewController: UIViewController {
                     self.view.layoutIfNeeded() // redraw if necessary
                 })
         }
+    }
+    
+    
+    // MARK: Gesture Recognizer Function
+    
+    func handleSingleTap(tapRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
 }
