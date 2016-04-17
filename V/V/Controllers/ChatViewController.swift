@@ -16,6 +16,10 @@ class ChatViewController: UIViewController {
     private var messages = [Message]()
     private let cellIdentifier = "Cell"
     
+    // for when the Keyboard pops up
+    private var bottomConstraint: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,11 +56,14 @@ class ChatViewController: UIViewController {
         sendButton.setTitle("Send", forState: .Normal)
         sendButton.setContentHuggingPriority(251, forAxis: .Horizontal)
         
+        // Define and activate the bottom constraint
+        bottomConstraint = newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor)
+        bottomConstraint.active = true
+        
         // Add new message area's constraints (including inner UITextView and UIButton)
         let newMessageAreaConstraints: [NSLayoutConstraint] = [
             newMessageArea.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
             newMessageArea.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
             newMessageField.leadingAnchor.constraintEqualToAnchor(newMessageArea.leadingAnchor, constant: 10),
             newMessageField.centerYAnchor.constraintEqualToAnchor(newMessageArea.centerYAnchor),
             sendButton.trailingAnchor.constraintEqualToAnchor(newMessageArea.trailingAnchor, constant: -10),
