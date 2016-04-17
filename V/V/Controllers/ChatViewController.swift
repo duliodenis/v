@@ -29,6 +29,23 @@ class ChatViewController: UIViewController {
             messages.append(m)
         }
         
+        // Add a new message area
+        let newMessageArea = UIView()
+        newMessageArea.backgroundColor = UIColor.lightGrayColor()
+        newMessageArea.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(newMessageArea)
+        
+        // Add new message area's constraints
+        let newMessageAreaConstraints: [NSLayoutConstraint] = [
+            newMessageArea.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
+            newMessageArea.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
+            newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
+            newMessageArea.heightAnchor.constraintEqualToConstant(50.0)
+        ]
+        
+        // And activate them
+        NSLayoutConstraint.activateConstraints(newMessageAreaConstraints)
+        
         // register the cell identifier of the tableView and use the Custom ChatCell
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         
@@ -50,7 +67,7 @@ class ChatViewController: UIViewController {
             tableView.topAnchor.constraintEqualToAnchor(view.topAnchor),
             tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
             tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            tableView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor)]
+            tableView.bottomAnchor.constraintEqualToAnchor(newMessageArea.topAnchor)]
         
         // Activate the tableView constraints
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
