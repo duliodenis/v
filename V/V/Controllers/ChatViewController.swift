@@ -11,6 +11,7 @@ import UIKit
 class ChatViewController: UIViewController {
 
     private let tableView = UITableView()
+    private let newMessageField = UITextView()
     
     private var messages = [Message]()
     private let cellIdentifier = "Cell"
@@ -34,6 +35,22 @@ class ChatViewController: UIViewController {
         newMessageArea.backgroundColor = UIColor.lightGrayColor()
         newMessageArea.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newMessageArea)
+        
+        // Add the new Message Field
+        newMessageField.translatesAutoresizingMaskIntoConstraints = false
+        newMessageArea.addSubview(newMessageField)
+        
+        // turn off scrolling since its a TextView
+        newMessageField.scrollEnabled = false
+        
+        // add a Message Send button 
+        let sendButton = UIButton()
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        newMessageArea.addSubview(sendButton)
+        
+        // add a title to the button and a content hugging priority
+        sendButton.setTitle("Send", forState: .Normal)
+        sendButton.setContentHuggingPriority(251, forAxis: .Horizontal)
         
         // Add new message area's constraints
         let newMessageAreaConstraints: [NSLayoutConstraint] = [
