@@ -100,6 +100,25 @@ class ChatViewController: UIViewController {
         
         // Activate the tableView constraints
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
+        
+        // Add an NSNotification Listener for the Keyboard showing
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    
+    // MARK: Keyboard Will Show Selector Function
+    
+    func keyboardWillShow(notification: NSNotification) {
+        // optional chaining to ensure we have all three values
+        if let userInfo = notification.userInfo,
+            frame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue,
+            animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey]?.doubleValue {
+                let newFrame = view.convertRect(frame, fromView: (UIApplication.sharedApplication().delegate?.window)!)
+                bottomConstraint.constant = newFrame.origin.y - CGRectGetHeight(view.frame) // the height of the keyboard
+                UIView.animateWithDuration(animationDuration, animations: {
+                    self.view.layoutIfNeeded() // redraw if necessary
+                })
+        }
     }
     
 }
