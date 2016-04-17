@@ -52,12 +52,17 @@ class ChatViewController: UIViewController {
         sendButton.setTitle("Send", forState: .Normal)
         sendButton.setContentHuggingPriority(251, forAxis: .Horizontal)
         
-        // Add new message area's constraints
+        // Add new message area's constraints (including inner UITextView and UIButton)
         let newMessageAreaConstraints: [NSLayoutConstraint] = [
             newMessageArea.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
             newMessageArea.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
             newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
-            newMessageArea.heightAnchor.constraintEqualToConstant(50.0)
+            newMessageField.leadingAnchor.constraintEqualToAnchor(newMessageArea.leadingAnchor, constant: 10),
+            newMessageField.centerYAnchor.constraintEqualToAnchor(newMessageArea.centerYAnchor),
+            sendButton.trailingAnchor.constraintEqualToAnchor(newMessageArea.trailingAnchor, constant: -10),
+            newMessageField.trailingAnchor.constraintEqualToAnchor(sendButton.leadingAnchor, constant: -10),
+            sendButton.centerYAnchor.constraintEqualToAnchor(newMessageField.centerYAnchor),
+            newMessageArea.heightAnchor.constraintEqualToAnchor(newMessageField.heightAnchor, constant: 20)
         ]
         
         // And activate them
