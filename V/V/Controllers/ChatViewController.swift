@@ -101,8 +101,9 @@ class ChatViewController: UIViewController {
         // Activate the tableView constraints
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
         
-        // Add an NSNotification Listener for the Keyboard showing
+        // Add an NSNotification Listener for the Keyboard showing and hiding
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
         // Add single tap gesture recognizer to dismiss keyboard
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
@@ -111,9 +112,28 @@ class ChatViewController: UIViewController {
     }
     
     
-    // MARK: Keyboard Will Show Selector Function
+    // MARK: Keyboard Will Show and Hide Selector Functions
     
     func keyboardWillShow(notification: NSNotification) {
+        updateBottomConstraint(notification)
+    }
+    
+    
+    func keyboardWillHide(notification: NSNotification) {
+        updateBottomConstraint(notification)
+    }
+    
+    
+    // MARK: Gesture Recognizer Function
+    
+    func handleSingleTap(tapRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    
+    // MARK: Updating the Bottom Constraint Function
+    
+    func updateBottomConstraint(notification: NSNotification) {
         // optional chaining to ensure we have all three values
         if let userInfo = notification.userInfo,
             frame = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue,
@@ -124,13 +144,6 @@ class ChatViewController: UIViewController {
                     self.view.layoutIfNeeded() // redraw if necessary
                 })
         }
-    }
-    
-    
-    // MARK: Gesture Recognizer Function
-    
-    func handleSingleTap(tapRecognizer: UITapGestureRecognizer) {
-        view.endEditing(true)
     }
     
 }
