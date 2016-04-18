@@ -55,6 +55,8 @@ class ChatViewController: UIViewController {
         // add a title to the button and a content hugging priority
         sendButton.setTitle("Send", forState: .Normal)
         sendButton.setContentHuggingPriority(251, forAxis: .Horizontal)
+        // also set the send button's compression resistance priority above the default
+        sendButton.setContentCompressionResistancePriority(751, forAxis: .Horizontal)
         
         // Define and activate the bottom constraint
         bottomConstraint = newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor)
