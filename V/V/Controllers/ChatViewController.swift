@@ -57,6 +57,8 @@ class ChatViewController: UIViewController {
         sendButton.setContentHuggingPriority(251, forAxis: .Horizontal)
         // also set the send button's compression resistance priority above the default
         sendButton.setContentCompressionResistancePriority(751, forAxis: .Horizontal)
+        // add a target to the button
+        sendButton.addTarget(self, action: Selector("tappedSend:"), forControlEvents: .TouchUpInside)
         
         // Define and activate the bottom constraint
         bottomConstraint = newMessageArea.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor)
@@ -146,6 +148,29 @@ class ChatViewController: UIViewController {
                     self.view.layoutIfNeeded() // redraw if necessary
                 })
         }
+    }
+    
+    
+    // MARK: Action Functions
+    
+    func tappedSend(button: UIButton) {
+        // Ensure the new message field has some text in it before proceeding
+        guard let text = newMessageField.text where text.characters.count > 0 else { return }
+        
+        // Create a new instance of message
+        let message = Message()
+        // push the new text inputted into the new message object
+        message.text = text
+        // this is not an incoming message
+        message.incoming = false
+        // append to the messages array
+        messages.append(message)
+        
+        // reload data in the tableView
+        tableView.reloadData()
+        
+        // and scroll tableView down to the new message
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: tableView.numberOfRowsInSection(0) - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
     }
     
 }
