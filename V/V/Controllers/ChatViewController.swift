@@ -20,6 +20,8 @@ class ChatViewController: UIViewController {
     private var bottomConstraint: NSLayoutConstraint!
     
     
+    // MARK: View Lifecycle Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,6 +118,14 @@ class ChatViewController: UIViewController {
     }
     
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // use our tableView extension to scroll to the bottom
+        tableView.scrollToBottom()
+    }
+    
+    
     // MARK: Keyboard Will Show and Hide Selector Functions
     
     func keyboardWillShow(notification: NSNotification) {
@@ -147,6 +157,7 @@ class ChatViewController: UIViewController {
                 UIView.animateWithDuration(animationDuration, animations: {
                     self.view.layoutIfNeeded() // redraw if necessary
                 })
+                tableView.scrollToBottom()
         }
     }
     
@@ -166,11 +177,17 @@ class ChatViewController: UIViewController {
         // append to the messages array
         messages.append(message)
         
+        // reset the new message text field
+        newMessageField.text = ""
+        
         // reload data in the tableView
         tableView.reloadData()
         
-        // and scroll tableView down to the new message
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: tableView.numberOfRowsInSection(0) - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        // resign first responder in order to hide the keyboard after sending
+        view.endEditing(true)
+        
+        // then use our tableView extension to scroll to the bottom
+        tableView.scrollToBottom()
     }
     
 }

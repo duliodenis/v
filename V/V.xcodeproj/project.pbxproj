@@ -14,6 +14,7 @@
 		6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */; };
 		6C576B0A1CBE9F200054447A /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* ChatCell.swift */; };
 		6C5BFF841CBD3BA300AF33FB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BFF831CBD3BA300AF33FB /* Message.swift */; };
+		6CB57DF61CC58BFA00307103 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/ChatViewController.swift; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = Views/ChatCell.swift; sourceTree = "<group>"; };
 		6C5BFF831CBD3BA300AF33FB /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Model/Message.swift; sourceTree = "<group>"; };
+		6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Scroll.swift"; path = "Extensions/UITableView+Scroll.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				6C4CC59F1CBC704000905D99 /* Views */,
 				6C4CC59E1CBC703300905D99 /* Controllers */,
 				6C5BFF821CBD3B6C00AF33FB /* Model */,
+				6CB57DF41CC58BC700307103 /* Extensions */,
 				6C4CC5A11CBC704F00905D99 /* Resources */,
 				6C4CC5A01CBC704800905D99 /* Infrastructure */,
 			);
@@ -108,6 +111,14 @@
 				6C5BFF831CBD3BA300AF33FB /* Message.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		6CB57DF41CC58BC700307103 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CB57DF61CC58BFA00307103 /* UITableView+Scroll.swift in Sources */,
 				6C5BFF841CBD3BA300AF33FB /* Message.swift in Sources */,
 				6C576B0A1CBE9F200054447A /* ChatCell.swift in Sources */,
 				6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */,
