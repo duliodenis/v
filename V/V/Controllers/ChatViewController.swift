@@ -28,12 +28,21 @@ class ChatViewController: UIViewController {
         // initial message data for testing
         var localIncoming = true
         
+        // generate a test date for the timestamp
+        var date = NSDate(timeIntervalSince1970: 1100000000)
+        
         for i in 0...10 {
             let m = Message()
             m.text = String(i)
+            m.timestamp = date
             m.incoming = localIncoming
             localIncoming = !localIncoming
             messages.append(m)
+            
+            // increment the day every other test message
+            if i%2 == 0 {
+                date = NSDate(timeInterval: 60*60*24, sinceDate: date)
+            }
         }
         
         // Add a new message area
@@ -174,6 +183,10 @@ class ChatViewController: UIViewController {
         message.text = text
         // this is not an incoming message
         message.incoming = false
+        
+        // add the timestamp
+        message.timestamp = NSDate()
+        
         // append to the messages array
         messages.append(message)
         
