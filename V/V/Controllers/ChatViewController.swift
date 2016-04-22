@@ -13,7 +13,11 @@ class ChatViewController: UIViewController {
     private let tableView = UITableView()
     private let newMessageField = UITextView()
     
-    private var messages = [Message]()
+    // a dictionary with a date as the key and an array of messages as the value
+    private var sections = [NSDate: [Message]]()
+    
+    // and array of dates to hold all the keys of the dictionary
+    private var dates = [NSDate]()
     private let cellIdentifier = "Cell"
     
     // for when the Keyboard pops up
@@ -37,7 +41,7 @@ class ChatViewController: UIViewController {
             m.timestamp = date
             m.incoming = localIncoming
             localIncoming = !localIncoming
-            messages.append(m)
+            addMessage(m)
             
             // increment the day every other test message
             if i%2 == 0 {
@@ -187,8 +191,8 @@ class ChatViewController: UIViewController {
         // add the timestamp
         message.timestamp = NSDate()
         
-        // append to the messages array
-        messages.append(message)
+        // add the message
+        addMessage(message)
         
         // reset the new message text field
         newMessageField.text = ""
@@ -203,6 +207,33 @@ class ChatViewController: UIViewController {
         tableView.scrollToBottom()
     }
     
+    
+    // MARK: Add Message 
+    //       takes a message parameter
+    
+    func addMessage(message: Message) {
+        // ensure we have a timestamp in our message - otherwise pass thru
+        guard let date = message.timestamp else { return }
+        
+        // create a calendar instance
+        let calendar = NSCalendar.currentCalendar()
+        let startDay = calendar.startOfDayForDate(date)
+        
+        // get correct value for the current start day
+        var messages = sections[startDay]
+        
+        // if messages are nil then append start day to the dates array
+        if messages == nil {
+            dates.append(startDay)
+            // initialize the messages array and specify it as holding the messages instance
+            messages = [Message]()
+        }
+        // append the new message to the messages array
+        messages!.append(message)
+        // update the value to the start day key with the added message
+        sections[startDay] = messages
+    }
+    
 }
 
 
@@ -210,17 +241,37 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: UITableViewDataSource {
     
+    // MARK: Get Message
+    //       takes a single parameter for the specific section required
+    //       returns an array of messages
+    
+    func getMessages(section: Int) -> [Message] {
+        // get the date for the section using the dates array
+        let date = dates[section]
+        // return the messages from the sections dictionary using the date as the key
+        return sections[date]!
+    }
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return dates.count
+    }
+    
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return getMessages(section).count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatCell
         
+        let messages = getMessages(indexPath.section)
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.text
         cell.incoming(message.incoming)
+        
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
     }
