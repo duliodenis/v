@@ -277,6 +277,29 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // initialize an instance of a UIView
+        let newView = UIView()
+        // with a clear background color
+        newView.backgroundColor = UIColor.clearColor()
+        // and for some padding make a padding view
+        let paddingView = UIView()
+        // which we add as a subview to our new view
+        newView.addSubview(paddingView)
+        // and turn of auto resizing mask into constraints
+        paddingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // initialize a new UILabel to be used as a date label
+        let dateLabel = UILabel()
+        // and add datelabel to the padding view
+        paddingView.addSubview(dateLabel)
+        // turn off autoresizing mask into constraints for the date label too
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // return the new view
+        return newView
+    }
+    
 }
 
 
