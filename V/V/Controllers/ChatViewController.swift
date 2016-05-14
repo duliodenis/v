@@ -297,19 +297,34 @@ extension ChatViewController: UITableViewDataSource {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         // Setup constraints for the header
+        // add some padding to the padding view as the name suggests - height 5 / width 10
         let constraints: [NSLayoutConstraint] = [
-            paddingView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
-            paddingView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor),
+            paddingView.centerXAnchor.constraintEqualToAnchor(newView.centerXAnchor),
+            paddingView.centerYAnchor.constraintEqualToAnchor(newView.centerYAnchor),
             dateLabel.centerXAnchor.constraintEqualToAnchor(paddingView.centerXAnchor),
             dateLabel.centerYAnchor.constraintEqualToAnchor(paddingView.centerYAnchor),
-            // add some padding to the padding view as the name suggests - height 5 / width 10
             paddingView.heightAnchor.constraintEqualToAnchor(dateLabel.heightAnchor, constant: 5),
             paddingView.widthAnchor.constraintEqualToAnchor(dateLabel.widthAnchor, constant: 10),
-            view.heightAnchor.constraintEqualToAnchor(paddingView.heightAnchor)
+            newView.heightAnchor.constraintEqualToAnchor(paddingView.heightAnchor)
         ]
         
         // activate the array of constraints
         NSLayoutConstraint.activateConstraints(constraints)
+
+        // Setup a Date Formatter for the date label
+        let formatter = NSDateFormatter()
+        // specify a format of Month Day Year
+        formatter.dateFormat = "MMM dd, YYYY"
+        
+        // then update the date label's text attribute using the formatter using the proper date
+        dateLabel.text = formatter.stringFromDate(dates[section])
+        
+        // customize the padding view - with a nice rounded edges
+        paddingView.layer.cornerRadius = 10
+        // clipping any sublayers
+        paddingView.layer.masksToBounds = true
+        // and adding a sweet Nephritis Green
+        paddingView.backgroundColor = UIColor(red: 39/255, green: 174/255, blue: 96/255, alpha: 1)
         
         // return the new view
         return newView

@@ -1,7 +1,10 @@
 # V
 An iOS 9 / Swift 2 person to person and group real-time communications app with contact import, Core Data persistence, and Firebase Cloud sync.
 
-![](art/screenshot/V13.gif?raw=true)
+![](art/screenshot/V14.gif?raw=true)
+
+## Contributing
+See [CONTRIBUTING](CONTRIBUTING).
 
 ### Licensing
 V is licensed under [the MIT License](LICENSE).
