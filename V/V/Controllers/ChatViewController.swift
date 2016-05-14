@@ -330,6 +330,16 @@ extension ChatViewController: UITableViewDataSource {
         return newView
     }
     
+    
+    // Configure some spacing for the footer
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
 }
 
 
