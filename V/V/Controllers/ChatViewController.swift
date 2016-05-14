@@ -296,6 +296,21 @@ extension ChatViewController: UITableViewDataSource {
         // turn off autoresizing mask into constraints for the date label too
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        // Setup constraints for the header
+        let constraints: [NSLayoutConstraint] = [
+            paddingView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+            paddingView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor),
+            dateLabel.centerXAnchor.constraintEqualToAnchor(paddingView.centerXAnchor),
+            dateLabel.centerYAnchor.constraintEqualToAnchor(paddingView.centerYAnchor),
+            // add some padding to the padding view as the name suggests - height 5 / width 10
+            paddingView.heightAnchor.constraintEqualToAnchor(dateLabel.heightAnchor, constant: 5),
+            paddingView.widthAnchor.constraintEqualToAnchor(dateLabel.widthAnchor, constant: 10),
+            view.heightAnchor.constraintEqualToAnchor(paddingView.heightAnchor)
+        ]
+        
+        // activate the array of constraints
+        NSLayoutConstraint.activateConstraints(constraints)
+        
         // return the new view
         return newView
     }
