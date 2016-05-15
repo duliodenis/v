@@ -2,14 +2,16 @@
 //  Message.swift
 //  V
 //
-//  Created by Dulio Denis on 4/12/16.
+//  Created by Dulio Denis on 5/15/16.
 //  Copyright © 2016 Dulio Denis. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-class Message {
-    var text: String?
-    var incoming = false
-    var timestamp: NSDate?
+
+class Message: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
+
 }
