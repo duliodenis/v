@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ChatViewController: UIViewController {
 
@@ -24,6 +25,8 @@ class ChatViewController: UIViewController {
     // for when the Keyboard pops up
     private var bottomConstraint: NSLayoutConstraint!
     
+    // an optional Core Data Managed Object Context attribute
+    var context: NSManagedObjectContext?
     
     // MARK: View Lifecycle Functions
     
