@@ -44,9 +44,6 @@ class ChatViewController: UIViewController {
                 for message in result {
                     addMessage(message)
                 }
-                
-                // sort dates array using the sort closure 
-                dates = dates.sort({ $0.earlierDate($1) == $0 })
             }
         } catch {
             print("Could not fetch.")
@@ -240,11 +237,19 @@ class ChatViewController: UIViewController {
         // if messages are nil then append start day to the dates array
         if messages == nil {
             dates.append(startDay)
+            
+            // sort dates array using the sort closure
+            dates = dates.sort({ $0.earlierDate($1) == $0 })
+            
             // initialize the messages array and specify it as holding the messages instance
             messages = [Message]()
         }
         // append the new message to the messages array
         messages!.append(message)
+        
+        // and sort in place based on the timestamp attribute
+        messages!.sortInPlace{ $0.timestamp!.earlierDate($1.timestamp!) == $0.timestamp! }
+        
         // update the value to the start day key with the added message
         sections[startDay] = messages
     }
