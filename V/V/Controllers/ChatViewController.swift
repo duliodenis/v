@@ -33,9 +33,21 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Fetch any Messages from the persistent store and add them to the view
+        do {
+            let request = NSFetchRequest(entityName: "Message")
+            if let result = try context?.executeFetchRequest(request) as? [Message] {
+                for message in result {
+                    addMessage(message)
+                }
+            }
+        } catch {
+            print("Could not fetch.")
+        }
+        
         // Add a new message area
         let newMessageArea = UIView()
-        newMessageArea.backgroundColor = UIColor.lightGrayColor()
+        newMessageArea.backgroundColor  = UIColor.lightGrayColor()
         newMessageArea.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newMessageArea)
         
@@ -159,7 +171,7 @@ class ChatViewController: UIViewController {
     }
     
     
-    // MARK: Action Functions
+    // MARK: Send Message
     
     func tappedSend(button: UIButton) {
         // Ensure the new message field has some text in it before proceeding
@@ -181,6 +193,14 @@ class ChatViewController: UIViewController {
         
         // add the message
         addMessage(message)
+        
+        // save to context
+        do {
+            try context.save()
+        } catch {
+            print("Problem Saving to Context.")
+            return
+        }
         
         // reset the new message text field
         newMessageField.text = ""
