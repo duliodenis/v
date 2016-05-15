@@ -33,26 +33,6 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // initial message data for testing
-        var localIncoming = true
-        
-        // generate a test date for the timestamp
-        var date = NSDate(timeIntervalSince1970: 1100000000)
-        
-        for i in 0...10 {
-            let m = Message()
-            m.text = String(i)
-            m.timestamp = date
-            m.incoming = localIncoming
-            localIncoming = !localIncoming
-            addMessage(m)
-            
-            // increment the day every other test message
-            if i%2 == 0 {
-                date = NSDate(timeInterval: 60*60*24, sinceDate: date)
-            }
-        }
-        
         // Add a new message area
         let newMessageArea = UIView()
         newMessageArea.backgroundColor = UIColor.lightGrayColor()
@@ -185,12 +165,16 @@ class ChatViewController: UIViewController {
         // Ensure the new message field has some text in it before proceeding
         guard let text = newMessageField.text where text.characters.count > 0 else { return }
         
-        // Create a new instance of message
-        let message = Message()
+        // Guard against a nil context
+        guard let context = context else { return }
+        
+        // Create a new instance of the entity message from our context
+        guard let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as? Message else { return }
+        
         // push the new text inputted into the new message object
         message.text = text
         // this is not an incoming message
-        message.incoming = false
+        message.isIncoming = false
         
         // add the timestamp
         message.timestamp = NSDate()
@@ -273,7 +257,7 @@ extension ChatViewController: UITableViewDataSource {
         let messages = getMessages(indexPath.section)
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.text
-        cell.incoming(message.incoming)
+        cell.incoming(message.isIncoming)
         
         cell.backgroundColor = UIColor.clearColor()
         

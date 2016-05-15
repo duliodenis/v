@@ -14,7 +14,7 @@ class Message: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    // our isIncoming attribute to work with the CoreData incoming Boolean
+    // our isIncoming attribute to work with the CoreData incoming NSNumber
     
     var isIncoming: Bool {
         get {
