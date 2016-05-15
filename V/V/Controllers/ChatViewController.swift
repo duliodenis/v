@@ -36,10 +36,17 @@ class ChatViewController: UIViewController {
         // Fetch any Messages from the persistent store and add them to the view
         do {
             let request = NSFetchRequest(entityName: "Message")
+            
+            // add a sort descriptor using a descending timestamp as a key
+            request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+            
             if let result = try context?.executeFetchRequest(request) as? [Message] {
                 for message in result {
                     addMessage(message)
                 }
+                
+                // sort dates array using the sort closure 
+                dates = dates.sort({ $0.earlierDate($1) == $0 })
             }
         } catch {
             print("Could not fetch.")
@@ -47,7 +54,7 @@ class ChatViewController: UIViewController {
         
         // Add a new message area
         let newMessageArea = UIView()
-        newMessageArea.backgroundColor  = UIColor.lightGrayColor()
+        newMessageArea.backgroundColor = UIColor.lightGrayColor()
         newMessageArea.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newMessageArea)
         
