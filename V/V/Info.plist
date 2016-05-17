@@ -44,6 +44,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>AdventPro-Light.ttf</string>
+		<string>AdventPro-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

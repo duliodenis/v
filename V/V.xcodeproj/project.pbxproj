@@ -15,6 +15,8 @@
 		6C27CE8A1CE8EDB400C42FB4 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CE871CE8EDB400C42FB4 /* Message+CoreDataProperties.swift */; };
 		6C27CE8C1CE9210200C42FB4 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CE8B1CE9210200C42FB4 /* ChatCell.swift */; };
 		6C27CE8E1CE9257100C42FB4 /* AdventPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27CE8D1CE9257100C42FB4 /* AdventPro-Light.ttf */; };
+		6C27CE901CEBC2B000C42FB4 /* AdventPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27CE8F1CEBC2B000C42FB4 /* AdventPro-Regular.ttf */; };
+		6C27CE921CEBC50F00C42FB4 /* AllChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */; };
 		6C4CC58D1CBC701C00905D99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */; };
 		6C4CC5921CBC701C00905D99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5901CBC701C00905D99 /* Main.storyboard */; };
 		6C4CC5941CBC701C00905D99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5931CBC701C00905D99 /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		6C27CE871CE8EDB400C42FB4 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "Model/Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C27CE8B1CE9210200C42FB4 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCell.swift; path = Views/ChatCell.swift; sourceTree = "<group>"; };
 		6C27CE8D1CE9257100C42FB4 /* AdventPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AdventPro-Light.ttf"; path = "Fonts/AdventPro-Light.ttf"; sourceTree = "<group>"; };
+		6C27CE8F1CEBC2B000C42FB4 /* AdventPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AdventPro-Regular.ttf"; path = "Fonts/AdventPro-Regular.ttf"; sourceTree = "<group>"; };
+		6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllChatsViewController.swift; path = Controllers/AllChatsViewController.swift; sourceTree = "<group>"; };
 		6C4CC5891CBC701C00905D99 /* V.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C4CC5911CBC701C00905D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		6C4CC59E1CBC703300905D99 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */,
 				6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */,
 			);
 			name = Controllers;
@@ -116,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				6C27CE8D1CE9257100C42FB4 /* AdventPro-Light.ttf */,
+				6C27CE8F1CEBC2B000C42FB4 /* AdventPro-Regular.ttf */,
 				6C4CC5931CBC701C00905D99 /* Assets.xcassets */,
 			);
 			name = Resources;
@@ -204,6 +210,7 @@
 				6C4CC5941CBC701C00905D99 /* Assets.xcassets in Resources */,
 				6C4CC5921CBC701C00905D99 /* Main.storyboard in Resources */,
 				6C27CE8E1CE9257100C42FB4 /* AdventPro-Light.ttf in Resources */,
+				6C27CE901CEBC2B000C42FB4 /* AdventPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +227,7 @@
 				6C27CE801CE8D13100C42FB4 /* Model.xcdatamodeld in Sources */,
 				6C27CE881CE8EDB400C42FB4 /* Chat+CoreDataProperties.swift in Sources */,
 				6C27CE891CE8EDB400C42FB4 /* Chat.swift in Sources */,
+				6C27CE921CEBC50F00C42FB4 /* AllChatsViewController.swift in Sources */,
 				6C27CE7D1CE8CBC100C42FB4 /* CoreDataStack.swift in Sources */,
 				6C27CE841CE8D7EF00C42FB4 /* Message.swift in Sources */,
 				6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */,

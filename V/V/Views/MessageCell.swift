@@ -55,6 +55,8 @@ class MessageCell: UITableViewCell {
         ]
         
         // set some specific message label text attributes
+        messageLabel.font = UIFont(name: "AdventPro-Regular", size: 18)
+        messageLabel.textColor = UIColor.whiteColor()
         messageLabel.textAlignment = .Center
         messageLabel.numberOfLines = 0 // use as many lines as it takes
     }
