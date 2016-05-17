@@ -95,7 +95,7 @@ class ChatViewController: UIViewController {
         NSLayoutConstraint.activateConstraints(newMessageAreaConstraints)
         
         // register the cell identifier of the tableView and use the Custom ChatCell
-        tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.registerClass(MessageCell.self, forCellReuseIdentifier: cellIdentifier)
         
         // set to be the delegate to the tableView's data source and delegate methods
         tableView.dataSource = self
@@ -284,7 +284,7 @@ extension ChatViewController: UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MessageCell
         
         let messages = getMessages(indexPath.section)
         let message = messages[indexPath.row]
