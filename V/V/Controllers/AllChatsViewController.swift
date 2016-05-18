@@ -44,6 +44,26 @@ class AllChatsViewController: UIViewController {
         
         // activate the constraints
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
+        
+        // setup fetched results controller to manage the data and sync to the tableview
+        // first safely unwrap the context optional
+        if let contextExists = context {
+            // if we have a context then setup a fetch request to get all the chat instances
+            let request = NSFetchRequest(entityName: "Chat")
+            // with a sort of last message time attribute
+            request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
+            
+            // set up fetched results controller with the initializer using the request and context
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: contextExists, sectionNameKeyPath: nil, cacheName: nil)
+            
+            // attempt a fetch
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch {
+                print("Error fetching results.")
+            }
+
+        }
     }
     
 
