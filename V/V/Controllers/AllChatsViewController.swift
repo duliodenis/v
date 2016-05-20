@@ -62,12 +62,42 @@ class AllChatsViewController: UIViewController {
             } catch {
                 print("Error fetching results.")
             }
-
         }
+        
+        // call test data function
+        testData()
     }
     
 
     func newChat() {
         
+    }
+    
+    
+    // MARK: Test Data Function
+    
+    func testData() {
+        // ensure there is a context
+        guard let contextExists = context else { return }
+        // generate a brand new chat instance
+        let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: contextExists) as? Chat
+    }
+    
+    
+    // MARK: Configure Cell Helper Method
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        // confirm we have a ChatCell
+        let cell = cell as! ChatCell
+        
+        // use a guard statement to access the fetched results controller and get the object at index path
+        guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else { return }
+        
+        // hard code some message for now
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MM/dd/YY"
+        cell.nameLabel.text = "Cindy"
+        cell.dateLabel.text = formatter.stringFromDate(NSDate())
+        cell.messageLabel.text = "Hey!"
     }
 }
