@@ -18,6 +18,8 @@ class AllChatsViewController: UIViewController {
     private let cellIdentifier = "MessageCell"
     
     
+    // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +29,9 @@ class AllChatsViewController: UIViewController {
         
         // ensure the tableview isn't distorted due to the navbar
         automaticallyAdjustsScrollViewInsets = false
+        
+        // set ourself as the data source of the tableview - see extension
+        tableView.dataSource = self
         
         // tableView setup: register class, initialize tableview footer, allow our use of auto-layout
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -69,6 +74,8 @@ class AllChatsViewController: UIViewController {
     }
     
 
+    // MARK: New Chat Function
+    
     func newChat() {
         
     }
@@ -100,4 +107,36 @@ class AllChatsViewController: UIViewController {
         cell.dateLabel.text = formatter.stringFromDate(NSDate())
         cell.messageLabel.text = "Hey!"
     }
+}
+
+
+extension AllChatsViewController: UITableViewDataSource {
+    
+    // MARK: UITableViewDataSource Methods
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // determine how many sections using the fetched results controller (else zero if nil)
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // guard against a nil fetched results controller and return zero
+        guard let sections = fetchedResultsController?.sections else { return 0 }
+        // else index into the current section
+        let currentSection = sections[section]
+        // and return the number of objects in the current section
+        return currentSection.numberOfObjects
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // dequeue a cell using the cellIdentifier
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        // use the helper method to configure
+        configureCell(cell, atIndexPath: indexPath)
+        // return that cell
+        return cell
+    }
+    
 }
