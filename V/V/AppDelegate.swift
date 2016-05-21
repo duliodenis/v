@@ -17,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
-        // get access to the chat VC we will be displaying on the screen from the window attribute
-        let chatViewController = window!.rootViewController as! ChatViewController
+        // set the root view controller to a navigation controller that has an embedded AllChatsVC
+        let allChatsViewController = AllChatsViewController()
+        let navigationController = UINavigationController(rootViewController: allChatsViewController)
+        window!.rootViewController = navigationController
         
         // setup the context with the Main Queue Concurrency Type
         let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -26,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup the coordinator using our CoreDataStack Singleton
         context.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
         
-        // assign the context of the chat VC to this context we just setup
-        chatViewController.context = context
+        // assign the context of the All Chats VC to this context we just setup
+        allChatsViewController.context = context
         
         return true
     }

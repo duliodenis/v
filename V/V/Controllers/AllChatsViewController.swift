@@ -25,7 +25,7 @@ class AllChatsViewController: UIViewController {
         
         // Set navbar title and new chat bar button item
         title = "Chats"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new_chat"), style: .Plain, target: self, action: "newChat")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new-chat"), style: .Plain, target: self, action: "newChat")
         
         // ensure the tableview isn't distorted due to the navbar
         automaticallyAdjustsScrollViewInsets = false
