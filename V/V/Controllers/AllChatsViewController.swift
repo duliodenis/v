@@ -30,8 +30,9 @@ class AllChatsViewController: UIViewController {
         // ensure the tableview isn't distorted due to the navbar
         automaticallyAdjustsScrollViewInsets = false
         
-        // set ourself as the data source of the tableview - see extension
+        // set ourself as the data source and delegate of the tableview - see extensions
         tableView.dataSource = self
+        tableView.delegate = self
         
         // tableView setup: register class, initialize tableview footer, allow our use of auto-layout
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -138,5 +139,26 @@ extension AllChatsViewController: UITableViewDataSource {
         // return that cell
         return cell
     }
+}
+
+
+extension AllChatsViewController: UITableViewDelegate {
     
+    // MARK: UITableViewDelegate Methods
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //return 100 points
+        return 100
+    }
+    
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // highlight when tapped
+        return true
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else { return }
+    }
 }
