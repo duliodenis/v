@@ -4,6 +4,10 @@
         <attribute name="lastMessageTime" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
     </entity>
+    <entity name="Contact" representedClassName=".Contact" syncable="YES">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Message" representedClassName=".Message" syncable="YES">
         <attribute name="incoming" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,7 +15,8 @@
         <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Chat" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Contact" positionX="-54" positionY="27" width="128" height="75"/>
     </elements>
 </model>

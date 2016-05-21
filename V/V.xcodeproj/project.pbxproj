@@ -23,6 +23,8 @@
 		6C4CC5971CBC701C00905D99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5951CBC701C00905D99 /* LaunchScreen.storyboard */; };
 		6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
+		6CA4AF251CF118A900E683DE /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4AF231CF118A900E683DE /* Contact+CoreDataProperties.swift */; };
+		6CA4AF261CF118A900E683DE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4AF241CF118A900E683DE /* Contact.swift */; };
 		6CB57DF61CC58BFA00307103 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		6C4CC5981CBC701C00905D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/ChatViewController.swift; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
+		6CA4AF231CF118A900E683DE /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "Model/Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6CA4AF241CF118A900E683DE /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = Model/Contact.swift; sourceTree = "<group>"; };
 		6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Scroll.swift"; path = "Extensions/UITableView+Scroll.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,8 +137,10 @@
 				6C27CE7C1CE8CBC100C42FB4 /* CoreDataStack.swift */,
 				6C27CE821CE8D7EF00C42FB4 /* Message.swift */,
 				6C27CE861CE8EDB400C42FB4 /* Chat.swift */,
+				6CA4AF241CF118A900E683DE /* Contact.swift */,
 				6C27CE851CE8EDB400C42FB4 /* Chat+CoreDataProperties.swift */,
 				6C27CE871CE8EDB400C42FB4 /* Message+CoreDataProperties.swift */,
+				6CA4AF231CF118A900E683DE /* Contact+CoreDataProperties.swift */,
 				6C27CE7E1CE8D13100C42FB4 /* Model.xcdatamodeld */,
 			);
 			name = Model;
@@ -227,7 +233,9 @@
 				6C27CE801CE8D13100C42FB4 /* Model.xcdatamodeld in Sources */,
 				6C27CE881CE8EDB400C42FB4 /* Chat+CoreDataProperties.swift in Sources */,
 				6C27CE891CE8EDB400C42FB4 /* Chat.swift in Sources */,
+				6CA4AF261CF118A900E683DE /* Contact.swift in Sources */,
 				6C27CE921CEBC50F00C42FB4 /* AllChatsViewController.swift in Sources */,
+				6CA4AF251CF118A900E683DE /* Contact+CoreDataProperties.swift in Sources */,
 				6C27CE7D1CE8CBC100C42FB4 /* CoreDataStack.swift in Sources */,
 				6C27CE841CE8D7EF00C42FB4 /* Message.swift in Sources */,
 				6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */,
