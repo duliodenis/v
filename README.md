@@ -1,5 +1,5 @@
 # V
-An iOS 9 / Swift 2 person to person and group real-time communications app with contact import, Core Data persistence, and Firebase Cloud sync.
+An iOS 9 / Swift 2 person to person messaging and group real-time communications platform with contact import, Core Data persistence, and Firebase 2.0 Cloud sync.
 
 ![](art/screenshot/V15.gif?raw=true)
 
