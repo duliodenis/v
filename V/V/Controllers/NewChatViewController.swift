@@ -46,6 +46,28 @@ class NewChatViewController: UIViewController {
         ]
         // and add the constraints
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
+        
+        // unwrap context to confirm not nil
+        if let context = context {
+            // setup a request for Contact objects
+            let request = NSFetchRequest(entityName: "Contact")
+            
+            // using sort descriptors have the request order last name then first name attributes
+            request.sortDescriptors = [
+                NSSortDescriptor(key: "lastName", ascending: true),
+                NSSortDescriptor(key: "firstName", ascending: true)
+            ]
+            
+            // set the fetched results controller to have multiple sections and a cache
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewChatViewController")
+            
+            // try to perform the fetch inside a do {} catch statement
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch {
+                print("Problem fetching New Chats.")
+            }
+        }
     }
     
     
