@@ -76,4 +76,16 @@ class NewChatViewController: UIViewController {
     func cancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    // MARK: Configure Cell Helper Method
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        
+        // get the relevant contact using the fetched results controller by getting the object at the indexPath
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
+        // update the cell's text label with the computed attribute of the contact's full name
+        cell.textLabel?.text = contact.fullName
+    }
+    
 }
