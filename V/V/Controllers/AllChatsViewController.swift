@@ -81,7 +81,14 @@ class AllChatsViewController: UIViewController {
     // MARK: New Chat Function
     
     func newChat() {
-        
+        // Get a New Chat View Controller
+        let vc = NewChatViewController()
+        // and assign the context to the new VC context attribute
+        vc.context = context
+        // then get a new Nav Controller with a NewChat VC as the root
+        let navVC = UINavigationController(rootViewController: vc)
+        // and present this Nav Controller
+        presentViewController(navVC, animated: true, completion: nil)
     }
     
     
