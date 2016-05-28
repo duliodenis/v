@@ -9,13 +9,15 @@
 import UIKit
 import CoreData
 
-class NewChatViewController: UIViewController {
+class NewChatViewController: UIViewController, TableViewFetchedResultsDisplayer {
     
     var context: NSManagedObjectContext?
     private var fetchedResultsController: NSFetchedResultsController?
     
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
     private let cellIdentifier = "ContactCell"
+    
+    private var fetchedResultsDelegate: NSFetchedResultsControllerDelegate?
     
     
     // MARK: View Lifecycle
@@ -66,8 +68,11 @@ class NewChatViewController: UIViewController {
             // set the fetched results controller to have multiple sections and a cache
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewChatViewController")
             
-            // set ourselves as the delegate of the fetched results controller
-            fetchedResultsController?.delegate = self
+            // set the fetchedResultsDelegate to a TableViewFetchedResultsDelegate instance
+            fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)
+            
+            // set the fetchedResultsDelegate as the delegate of the fetched results controller
+            fetchedResultsController?.delegate = fetchedResultsDelegate
             
             // try to perform the fetch inside a do {} catch statement
             do {
@@ -155,70 +160,4 @@ extension NewChatViewController: UITableViewDelegate {
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
     }
     
-}
-
-
-extension NewChatViewController: NSFetchedResultsControllerDelegate {
-    
-    // MARK: NSFetchedResultsControllerDelegate Methods
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        // start to expect changes to occur
-        tableView.beginUpdates()
-    }
-    
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        
-        // switch on the type of change
-        switch type {
-            
-            // for inserts call the tableView insert sections method
-        case .Insert:
-            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
-            // for deletes call the tabelView delete sections method
-        case .Delete:
-            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
-            // otherwise break
-        default:
-            break
-        }
-    }
-    
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        // switch on type of change
-        switch type {
-            
-            // for inserts call tableview insert rows at index path
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            
-            // for updates - get the cell, update it, and reload the tableView
-        case .Update:
-            let cell = tableView.cellForRowAtIndexPath(indexPath!)
-            configureCell(cell!, atIndexPath: indexPath!)
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            
-            // for moves - delete the cell from its original indexPath and add it to its new indexPath
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            
-            // for deletes call the tableView delete rows at index path method
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        }
-    }
-    
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        
-        // once the contents changed let the tableView know to end updates
-        tableView.endUpdates()
-    }
-
 }
