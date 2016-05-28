@@ -34,7 +34,12 @@ class NewChatViewController: UIViewController {
         tableView.registerClass(UITableView.self, forCellReuseIdentifier: cellIdentifier)
         // turn off auto resising mask so we can use constraints with our table view
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        // add it as a subview
+        
+        // set the delegate and data source of the table view to ourselves
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // add the tableView as a subview
         view.addSubview(tableView)
         
         // setup constraints for the table view
@@ -86,6 +91,65 @@ class NewChatViewController: UIViewController {
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
         // update the cell's text label with the computed attribute of the contact's full name
         cell.textLabel?.text = contact.fullName
+    }
+    
+}
+
+
+extension NewChatViewController: UITableViewDataSource {
+    
+    // MARK: UITableViewDataSource Methods
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // if we have a fetched results controller return the number of sections otherwise zero
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // guard against a nil fetched results controller and return zero
+        guard let sections = fetchedResultsController?.sections else { return 0 }
+        // else index into the current section
+        let currentSection = sections[section]
+        // and return the number of objects in the current section
+        return currentSection.numberOfObjects
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // dequeue a cell using the cellIdentifier
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        // use the helper method to configure
+        configureCell(cell, atIndexPath: indexPath)
+        // return the configured cell
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // guard against a nil fetched results controller and return zero
+        guard let sections = fetchedResultsController?.sections else { return nil }
+        // else index into the current section
+        let currentSection = sections[section]
+        // return the name attribute of the current cell
+        return currentSection.name
+    }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // enable editing of rows in the table view (like swipe to delete)
+        return true
+    }
+}
+
+extension NewChatViewController: UITableViewDelegate {
+    
+    // MARK: UITableViewDelegate Methods
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // set up the current contact using our fetched results controller at the indexPath
+        // use a guard to confirm its a contact otherwise just return from the method
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
     }
     
 }
