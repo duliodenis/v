@@ -15,7 +15,7 @@ class NewChatViewController: UIViewController {
     private var fetchedResultsController: NSFetchedResultsController?
     
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
-    private let cellIdentifier = "ContectCell"
+    private let cellIdentifier = "ContactCell"
     
     
     // MARK: View Lifecycle
@@ -31,7 +31,7 @@ class NewChatViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         // setup table view by registering it
-        tableView.registerClass(UITableView.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         // turn off auto resising mask so we can use constraints with our table view
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
