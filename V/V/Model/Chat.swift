@@ -41,4 +41,13 @@ class Chat: NSManagedObject {
         
         return nil
     }
+    
+    
+    // add a participant to the chat - takes a participant as an argument
+    
+    func add(participant contact: Contact) {
+        // add to the participants attribute the contact parameter
+        mutableSetValueForKey("participants").addObject(contact)
+    }
+    
 }
