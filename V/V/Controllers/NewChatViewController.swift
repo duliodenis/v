@@ -146,6 +146,15 @@ extension NewChatViewController: UITableViewDelegate {
         // set up the current contact using our fetched results controller at the indexPath
         // use a guard to confirm its a contact otherwise just return from the method
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
+        
+        // confirm we have a valid context
+        guard let context = context else { return }
+        
+        // generate a new chat instance using the insertNewObjectForEntityForName method 
+        guard let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else { return }
+        
+        // add the contact as a participant in the chat
+        chat.add(participant: contact)
     }
     
 }
