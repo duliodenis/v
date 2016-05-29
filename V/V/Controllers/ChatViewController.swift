@@ -124,12 +124,20 @@ class ChatViewController: UIViewController {
         // Remove the seperator line from the tableView
         tableView.separatorStyle = .None
         
+        // Add a background to the tableView
+        tableView.backgroundView = UIImageView(image: UIImage(named: "ChatBackground"))
+        tableView.backgroundView?.contentMode = .ScaleAspectFill
+        
+        // dynamically resize section header (with an estimate)
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 25
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
         // Constraints to have the tableView take up the view
         let tableViewConstraints: [NSLayoutConstraint] = [
-            tableView.topAnchor.constraintEqualToAnchor(view.topAnchor),
+            tableView.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
             tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
             tableView.bottomAnchor.constraintEqualToAnchor(newMessageArea.topAnchor)]

@@ -19,6 +19,8 @@ class NewChatViewController: UIViewController, TableViewFetchedResultsDisplayer 
     
     private var fetchedResultsDelegate: NSFetchedResultsControllerDelegate?
     
+    var chatCreationDelegate: ChatCreationDelegate?
+    
     
     // MARK: View Lifecycle
     
@@ -155,6 +157,11 @@ extension NewChatViewController: UITableViewDelegate {
         
         // add the contact as a participant in the chat
         chat.add(participant: contact)
+        
+        // call the ChatCreationDelegate created method
+        chatCreationDelegate?.created(chat: chat, inContext: context)
+        // dismiss VC
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
 }

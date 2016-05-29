@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer {
+class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate {
 
     var context: NSManagedObjectContext?
     private var fetchedResultsController: NSFetchedResultsController?
@@ -78,8 +78,10 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
     func newChat() {
         // Get a New Chat View Controller
         let vc = NewChatViewController()
-        // and assign the context to the new VC context attribute
+        // assign the context to the new VC context attribute
         vc.context = context
+        // assign the ChatCreationDelegate to self
+        vc.chatCreationDelegate = self
         // then get a new Nav Controller with a NewChat VC as the root
         let navVC = UINavigationController(rootViewController: vc)
         // and present this Nav Controller
@@ -112,6 +114,18 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         cell.nameLabel.text = "Cindy"
         cell.dateLabel.text = formatter.stringFromDate(NSDate())
         cell.messageLabel.text = "Hey!"
+    }
+    
+    
+    // MARK: Conform to the ChatCreationDelegate
+    func created(chat chat: Chat, inContext context: NSManagedObjectContext) {
+        // generate a ChatVC instance
+        let vc = ChatViewController()
+        // assign the context and chat attributes which are passed to us to the new ChatVC
+        vc.context = context
+        vc.chat = chat
+        // display the new ChatVC with a nav pushVC
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
