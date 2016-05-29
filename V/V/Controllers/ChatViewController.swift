@@ -28,6 +28,16 @@ class ChatViewController: UIViewController {
     // an optional Core Data Managed Object Context attribute
     var context: NSManagedObjectContext?
     
+    // chat attribute to access our chat
+    var chat: Chat?
+    
+    // private enum to keep track of any issues getting chat instance back from Core Data
+    private enum Error: ErrorType {
+        case NoChat
+        case NoContext
+    }
+    
+    
     // MARK: View Lifecycle Functions
     
     override func viewDidLoad() {
@@ -35,12 +45,16 @@ class ChatViewController: UIViewController {
         
         // Fetch any Messages from the persistent store and add them to the view
         do {
+            // confirm we have a valid chat and context otherwise throw an error
+            guard let chat = chat else { throw Error.NoChat }
+            guard let context = context else { throw Error.NoContext }
+            
             let request = NSFetchRequest(entityName: "Message")
             
             // add a sort descriptor using a descending timestamp as a key
             request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
             
-            if let result = try context?.executeFetchRequest(request) as? [Message] {
+            if let result = try context.executeFetchRequest(request) as? [Message] {
                 for message in result {
                     addMessage(message)
                 }
@@ -48,6 +62,9 @@ class ChatViewController: UIViewController {
         } catch {
             print("Could not fetch.")
         }
+        
+        // ensure the VC doesn't automatically adjust scroll view insets
+        automaticallyAdjustsScrollViewInsets = false
         
         // Add a new message area
         let newMessageArea = UIView()
