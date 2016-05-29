@@ -39,19 +39,9 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // tableView setup: register class, initialize tableview footer, allow our use of auto-layout
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-        
-        // add constraints to the tableview
-        let tableViewConstraints: [NSLayoutConstraint] = [
-            tableView.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
-            tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            tableView.bottomAnchor.constraintEqualToAnchor(bottomLayoutGuide.topAnchor)
-        ]
-        
-        // activate the constraints
-        NSLayoutConstraint.activateConstraints(tableViewConstraints)
+
+        // add tableView with activated constraints
+        fillViewWith(tableView)
         
         // setup fetched results controller to manage the data and sync to the tableview
         // first safely unwrap the context optional

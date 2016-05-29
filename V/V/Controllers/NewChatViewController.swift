@@ -34,25 +34,13 @@ class NewChatViewController: UIViewController, TableViewFetchedResultsDisplayer 
         
         // setup table view by registering it
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        // turn off auto resising mask so we can use constraints with our table view
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         // set the delegate and data source of the table view to ourselves
         tableView.delegate = self
         tableView.dataSource = self
         
-        // add the tableView as a subview
-        view.addSubview(tableView)
-        
-        // setup constraints for the table view
-        let tableViewConstraints: [NSLayoutConstraint] = [
-            tableView.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
-            tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            tableView.bottomAnchor.constraintEqualToAnchor(bottomLayoutGuide.topAnchor)
-        ]
-        // and add the constraints
-        NSLayoutConstraint.activateConstraints(tableViewConstraints)
+        // add tableView with activated constraints
+        fillViewWith(tableView)
         
         // unwrap context to confirm not nil
         if let context = context {
