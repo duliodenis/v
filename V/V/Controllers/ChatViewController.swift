@@ -149,6 +149,12 @@ class ChatViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
+        // get our mainContext
+        if let mainContext = context?.parentContext ?? context {
+            // listen for context objects did change and call contextUpdated() when it does
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextUpdated:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: mainContext)
+        }
+        
         // Add single tap gesture recognizer to dismiss keyboard
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer.numberOfTapsRequired = 1 // single tap
@@ -277,6 +283,32 @@ class ChatViewController: UIViewController {
         
         // update the value to the start day key with the added message
         sections[startDay] = messages
+    }
+    
+    
+    // MARK: Handle Context Updates
+    
+    func contextUpdated(notification: NSNotification) {
+        // access user info from the NSInsertedObjectsKey to get all the instance that have been
+        // inserted into CoreData
+        guard let set = (notification.userInfo![NSInsertedObjectsKey] as? NSSet) else { return }
+        // convert the set into an array
+        let objects = set.allObjects
+        
+        // and loop through each element in the array of objects
+        for object in objects {
+            // confirm the object is a message type
+            guard let message = object as? Message else { continue }
+            // ensure that the message has the same chat object id
+            if message.chat?.objectID == chat?.objectID {
+                // if it does call our addMessage() method
+                addMessage(message)
+            }
+        }
+        
+        // reload the tabelView and scroll to the bottom
+        tableView.reloadData()
+        tableView.scrollToBottom()
     }
     
 }
