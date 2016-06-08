@@ -212,6 +212,9 @@ class ChatViewController: UIViewController {
         // Ensure the new message field has some text in it before proceeding
         guard let text = newMessageField.text where text.characters.count > 0 else { return }
         
+        // check temporary context
+        checkTemporaryContext()
+        
         // Guard against a nil context
         guard let context = context else { return }
         
@@ -309,6 +312,27 @@ class ChatViewController: UIViewController {
         // reload the tabelView and scroll to the bottom
         tableView.reloadData()
         tableView.scrollToBottom()
+    }
+    
+    
+    // MARK: Check Temporary Context
+    
+    func checkTemporaryContext() {
+        // ensure we have a value for our mainContext and our chat instance
+        if let mainContext = context?.parentContext, chat = chat {
+            // assign context to a tempContext constant
+            let tempContext = context
+            // update the context to the mainContext
+            context = mainContext
+            // do a do-catch statement to attempt to save using our temp context
+            do {
+                try tempContext?.save()
+            } catch {
+                print("Error Saving TempContext.")
+            }
+            // update our chat attribute with the objectWithID method
+            self.chat = mainContext.objectWithID(chat.objectID) as? Chat
+        }
     }
     
 }
