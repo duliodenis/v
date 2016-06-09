@@ -229,9 +229,6 @@ class ChatViewController: UIViewController {
         // add the timestamp
         message.timestamp = NSDate()
         
-        // add the message
-        addMessage(message)
-        
         // save to context
         do {
             try context.save()
@@ -243,14 +240,8 @@ class ChatViewController: UIViewController {
         // reset the new message text field
         newMessageField.text = ""
         
-        // reload data in the tableView
-        tableView.reloadData()
-        
         // resign first responder in order to hide the keyboard after sending
         view.endEditing(true)
-        
-        // then use our tableView extension to scroll to the bottom
-        tableView.scrollToBottom()
     }
     
     
