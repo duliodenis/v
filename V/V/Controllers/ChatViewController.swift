@@ -326,6 +326,13 @@ class ChatViewController: UIViewController {
         }
     }
     
+    
+    // MARK: Remove Observers in deinit
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 }
 
 
