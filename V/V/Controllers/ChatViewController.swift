@@ -229,6 +229,11 @@ class ChatViewController: UIViewController {
         // add the timestamp
         message.timestamp = NSDate()
         
+        // add the chat to our message
+        message.chat = chat
+        // update the last message time now with this send
+        chat?.lastMessageTime = message.timestamp
+        
         // save to context
         do {
             try context.save()
