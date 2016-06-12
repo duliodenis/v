@@ -2,7 +2,7 @@
 //  Message+CoreDataProperties.swift
 //  V
 //
-//  Created by Dulio Denis on 5/15/16.
+//  Created by Dulio Denis on 6/12/16.
 //  Copyright © 2016 Dulio Denis. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,8 +15,8 @@ import CoreData
 extension Message {
 
     @NSManaged var text: String?
-    @NSManaged var incoming: NSNumber?
     @NSManaged var timestamp: NSDate?
     @NSManaged var chat: Chat?
+    @NSManaged var sender: Contact?
 
 }
