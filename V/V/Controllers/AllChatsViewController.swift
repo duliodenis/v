@@ -114,12 +114,18 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // use a guard statement to access the fetched results controller and get the object at index path
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else { return }
         
+        // use a guard statement to ensure we have a chat participant otherwise return
+        guard let contact = chat.participants?.anyObject() as? Contact else { return }
+        
+        // use a guard statment to access our last message and get the timestamp and text to update the cell
+        guard let lastMessage = chat.lastMessage, timestamp = lastMessage.timestamp, text = lastMessage.text else { return }
+        
         // hard code some message for now
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM/dd/YY"
-        cell.nameLabel.text = "Cindy"
-        cell.dateLabel.text = formatter.stringFromDate(NSDate())
-        cell.messageLabel.text = "Hey!"
+        cell.nameLabel.text = contact.fullName
+        cell.dateLabel.text = formatter.stringFromDate(timestamp)
+        cell.messageLabel.text = text
     }
     
     
