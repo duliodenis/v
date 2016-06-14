@@ -17,16 +17,9 @@ class Message: NSManagedObject {
     // our isIncoming attribute to work with the CoreData incoming NSNumber
     
     var isIncoming: Bool {
-        get {
-            // guard against no value by returning false
-            guard let incoming = incoming else { return false }
-            // otherwise return converted CoreData NSNumber value
-            return incoming.boolValue
-        }
-        
-        set(incoming) {
-            self.incoming = incoming
-        }
+        // will return true if sender exists - otherwise false
+        // meaning if we are the sender then its outgoing and false
+        return sender != nil
     }
 
 }
