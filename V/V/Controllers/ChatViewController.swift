@@ -223,8 +223,6 @@ class ChatViewController: UIViewController {
         
         // push the new text inputted into the new message object
         message.text = text
-        // this is not an incoming message
-        message.isIncoming = false
         
         // add the timestamp
         message.timestamp = NSDate()
