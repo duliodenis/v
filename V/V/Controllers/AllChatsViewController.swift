@@ -190,6 +190,18 @@ extension AllChatsViewController: UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // fetch the appropriate chat that was tapped
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else { return }
+        
+        // initialize the Next View Controller with an instance of a ChatVC
+        let nextVC = ChatViewController()
+        // set the context and the chat of the Next View Controller
+        nextVC.context = context
+        nextVC.chat = chat
+        
+        // present the Next VC by pushing into the navigation controller
+        navigationController?.pushViewController(nextVC, animated: true)
+        // and deselect the selected row in the tableView
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
