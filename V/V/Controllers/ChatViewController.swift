@@ -51,6 +51,9 @@ class ChatViewController: UIViewController {
             
             let request = NSFetchRequest(entityName: "Message")
             
+            // set the predicate attribute of the request to equal the chat instance of this VC
+            request.predicate = NSPredicate(format: "chat=%@", chat)
+            
             // add a sort descriptor using a descending timestamp as a key
             request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
             
