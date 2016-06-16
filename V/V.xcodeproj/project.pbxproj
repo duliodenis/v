@@ -71,6 +71,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C3FEDA01D13095C00E76E8B /* AllChatsVC */ = {
+			isa = PBXGroup;
+			children = (
+				6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */,
+				6C27CE8B1CE9210200C42FB4 /* ChatCell.swift */,
+			);
+			name = AllChatsVC;
+			sourceTree = "<group>";
+		};
+		6C3FEDA11D13097F00E76E8B /* ChatVC */ = {
+			isa = PBXGroup;
+			children = (
+				6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */,
+				6C576B091CBE9F200054447A /* MessageCell.swift */,
+			);
+			name = ChatVC;
+			sourceTree = "<group>";
+		};
+		6C3FEDA21D130A9900E76E8B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6CBEF9B31CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift */,
+				6CBEF9C11CFB788E00064D51 /* ChatCreationDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		6C4CC5801CBC701C00905D99 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +121,7 @@
 				6C4CC59E1CBC703300905D99 /* Controllers */,
 				6C5BFF821CBD3B6C00AF33FB /* Model */,
 				6CB57DF41CC58BC700307103 /* Extensions */,
+				6C3FEDA21D130A9900E76E8B /* Protocols */,
 				6C4CC5A11CBC704F00905D99 /* Resources */,
 				6C4CC5A01CBC704800905D99 /* Infrastructure */,
 			);
@@ -103,10 +131,9 @@
 		6C4CC59E1CBC703300905D99 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */,
+				6C3FEDA01D13095C00E76E8B /* AllChatsVC */,
+				6C3FEDA11D13097F00E76E8B /* ChatVC */,
 				6CA4AF501CF3F5A900E683DE /* NewChatViewController.swift */,
-				6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */,
-				6CBEF9B71CFB482E00064D51 /* UIViewController+FillViewWith.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -116,8 +143,6 @@
 			children = (
 				6C4CC5901CBC701C00905D99 /* Main.storyboard */,
 				6C4CC5951CBC701C00905D99 /* LaunchScreen.storyboard */,
-				6C576B091CBE9F200054447A /* MessageCell.swift */,
-				6C27CE8B1CE9210200C42FB4 /* ChatCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -152,8 +177,6 @@
 				6CBEFA441D0D8F1C00064D51 /* Contact+CoreDataProperties.swift */,
 				6CBEFA451D0D8F1C00064D51 /* Message+CoreDataProperties.swift */,
 				6CBEF9BE1CFB6D9D00064D51 /* Chat+CoreDataProperties.swift */,
-				6CBEF9B31CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift */,
-				6CBEF9C11CFB788E00064D51 /* ChatCreationDelegate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -162,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */,
+				6CBEF9B71CFB482E00064D51 /* UIViewController+FillViewWith.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
