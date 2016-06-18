@@ -88,12 +88,16 @@ class NewGroupViewController: UIViewController {
     // MARK: Navigation Bar Item Methods
     
     func cancel() {
+        // dismiss VC when cancel is tapped in the Nav bar
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     func next() {
-        
+        // when next is tapped in the Nav bar ensure we have a context and a Chat instance
+        guard let context = context, chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else { return }
+        // update the chat name with the subject field
+        chat.name = subjectField.text
     }
     
     
