@@ -217,7 +217,22 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
     // MARK: New Group Tapped Action
     
     func newGroupTapped() {
+        // instantiate a new NewGroupVC
+        let groupVC = NewGroupViewController()
+        // instantiate a new NSManagedObjectContext
+        let groupVCContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        // set this new NSManagedObjectContext as a child to our current context
+        groupVCContext.parentContext = context
+        // set the new child context as the context for our group VC
+        groupVC.context = groupVCContext
+        // set the chat creation delegate of the group VC to be the AllChatsVC instance
+        groupVC.chatCreationDelegate = self
         
+        // instantiate a UINav Controller
+        let navVC = UINavigationController(rootViewController: groupVC)
+        
+        // present our nav VC
+        presentViewController(navVC, animated: true, completion: nil)
     }
     
 }
