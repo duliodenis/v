@@ -50,6 +50,32 @@ class NewGroupViewController: UIViewController {
         bottomBorder.translatesAutoresizingMaskIntoConstraints = false
         // make bottom border a sub view of the subject field
         subjectField.addSubview(bottomBorder)
+        
+        // Setup Auto Layout Constraints
+        
+        let constraints: [NSLayoutConstraint] = [
+            // specify that subject field be top constrained to the top layout but not flush - border of 20
+            subjectField.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor, constant: 20),
+            // leading achor should be constrained to the margin's leading anchor
+            subjectField.leadingAnchor.constraintEqualToAnchor(view.layoutMarginsGuide.leadingAnchor),
+            // and trailing anchor is constrained to the view's trailing anchor
+            subjectField.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
+            // constrain the width of the bottom border to be equal to the subject field's width
+            bottomBorder.widthAnchor.constraintEqualToAnchor(subjectField.widthAnchor),
+            // the bottom anchor of the bottom border be constrained to the subject field's bottom anchor
+            bottomBorder.bottomAnchor.constraintEqualToAnchor(subjectField.bottomAnchor),
+            // the leading anchor to the subject field's leading anchor
+            bottomBorder.leadingAnchor.constraintEqualToAnchor(subjectField.leadingAnchor),
+            // and the bottom border can have a constant height of 1 point
+            bottomBorder.heightAnchor.constraintEqualToConstant(1),
+            // finally, the character number label center is equal to the subject field's center
+            characterNumberLabel.centerYAnchor.constraintEqualToAnchor(subjectField.centerYAnchor),
+            // and its trailing anchor is constrained to the subject field's margin trailing anchor
+            characterNumberLabel.trailingAnchor.constraintEqualToAnchor(subjectField.layoutMarginsGuide.trailingAnchor)
+        ]
+        
+        // Activate our constraints
+        NSLayoutConstraint.activateConstraints(constraints)
     }
     
 }
