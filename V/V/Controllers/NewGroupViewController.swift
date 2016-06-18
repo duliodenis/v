@@ -30,6 +30,9 @@ class NewGroupViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "cancel")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "next")
         
+        // update Next button
+        updateNextButton(forCharacterCount: 0)
+        
         // set the placeholder and delegate for our Subject Field variable
         subjectField.placeholder = "Group Subject"
         subjectField.delegate = self
@@ -37,6 +40,9 @@ class NewGroupViewController: UIViewController {
         subjectField.translatesAutoresizingMaskIntoConstraints = false
         // add the subjectField to the view
         view.addSubview(subjectField)
+        
+        // update the character label
+        updateCharacterLabel(forCharacterCount: 0)
         
         // setup the characterNumberLabel view 
         characterNumberLabel.textColor = UIColor.grayColor()
@@ -88,6 +94,27 @@ class NewGroupViewController: UIViewController {
     
     func next() {
         
+    }
+    
+    
+    // MARK: Update UI Elements Method
+    
+    func updateCharacterLabel(forCharacterCount length: Int) {
+        // Maximum number (25) minus the character count
+        characterNumberLabel.text = String(25 - length)
+    }
+    
+    
+    func updateNextButton(forCharacterCount length: Int) {
+        // if the length is zero then grey out and disable
+        if length == 0 {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.lightGrayColor()
+            navigationItem.rightBarButtonItem?.enabled = false
+        } else {
+        // otherwise enable
+            navigationItem.rightBarButtonItem?.tintColor = view.tintColor
+            navigationItem.rightBarButtonItem?.enabled = true
+        }
     }
     
 }
