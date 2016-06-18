@@ -39,6 +39,9 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // tableView setup: register class, initialize tableview footer, allow our use of auto-layout
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        // initialize table header view with our createHeader() function
+        tableView.tableHeaderView = createHeader()
 
         // add tableView with activated constraints
         fillViewWith(tableView)
@@ -158,6 +161,8 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         newGroupButton.setTitle("New Group", forState: .Normal)
         // set the title color
         newGroupButton.setTitleColor(view.tintColor, forState: .Normal)
+        // set the title font
+        newGroupButton.titleLabel?.font = UIFont(name: "AdventPro-Regular", size: 20)
         // and add a target action to the button
         newGroupButton.addTarget(self, action: "newGroupTapped", forControlEvents: .TouchUpInside)
         
@@ -188,6 +193,21 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // activate the constraints
         NSLayoutConstraint.activateConstraints(constraints)
         
+        // Provide the header view with a layout for Auto-Layout Sizing
+        // by first invalidating the layout
+        header.setNeedsLayout()
+        // and force the layout of subviews
+        header.layoutIfNeeded()
+        
+        // get the smallest possible height that satisfies its constraints
+        let height = header.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        // update our header's CGRect frame by first making a copy of the current frame
+        var frame = header.frame
+        // and then updating it with the new calculated height
+        frame.size.height = height
+        // and copying back the updated frame of the header
+        header.frame = frame
         
         // return the header
         return header
