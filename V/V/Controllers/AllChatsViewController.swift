@@ -130,6 +130,7 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
     
     
     // MARK: Conform to the ChatCreationDelegate
+    
     func created(chat chat: Chat, inContext context: NSManagedObjectContext) {
         // generate a ChatVC instance
         let vc = ChatViewController()
@@ -139,6 +140,47 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // display the new ChatVC with a nav pushVC
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
+    // MARK: Create Header View
+    
+    private func createHeader() -> UIView {
+        // generate a UIView instance
+        let header = UIView()
+        // generate a UIButton instance that will be in the header
+        let newGroupButton = UIButton()
+        // shutoff the autoresizing mask translation into constrains so we can set them
+        newGroupButton.translatesAutoresizingMaskIntoConstraints = false
+        // add the new group button as a subview to the header view
+        header.addSubview(newGroupButton)
+        
+        // add a title to the new group button
+        newGroupButton.setTitle("New Group", forState: .Normal)
+        // set the title color
+        newGroupButton.setTitleColor(view.tintColor, forState: .Normal)
+        // and add a target action to the button
+        newGroupButton.addTarget(self, action: "newGroupTapped", forControlEvents: .TouchUpInside)
+        
+        // generate a UIView to be used as a border view
+        let border = UIView()
+        // shutoff autoresizing mask translation into constrains so we can set them thru auto layout
+        border.translatesAutoresizingMaskIntoConstraints = false
+        // add the border as a subview to the header
+        header.addSubview(border)
+        // set the border background color
+        border.backgroundColor = UIColor.lightGrayColor()
+        
+        // return the header
+        return header
+    }
+    
+    
+    // MARK: New Group Tapped Action
+    
+    func newGroupTapped() {
+        
+    }
+    
 }
 
 
