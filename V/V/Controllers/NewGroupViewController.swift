@@ -98,6 +98,17 @@ class NewGroupViewController: UIViewController {
         guard let context = context, chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else { return }
         // update the chat name with the subject field
         chat.name = subjectField.text
+        
+        // instantiate the New Group Participants VC and set the context and chat
+        let newGroupParticipantsVC = NewGroupParticipantsViewController()
+        newGroupParticipantsVC.context = context
+        newGroupParticipantsVC.chat = chat
+        
+        // the chat creation delegate is the All Chats VC
+        newGroupParticipantsVC.chatCreationDelegate = chatCreationDelegate
+        
+        // Push our New Group Participants VC onto the Navigation Stack
+        navigationController?.pushViewController(newGroupParticipantsVC, animated: true)
     }
     
     
