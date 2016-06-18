@@ -122,4 +122,25 @@ class NewGroupViewController: UIViewController {
 
 extension NewGroupViewController: UITextFieldDelegate {
     
+    // user has changed the text and we need to determine if we should allow
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        // get current character count
+        let currentCharacterCount = textField.text?.characters.count ?? 0
+        // and the new length
+        let newLength = currentCharacterCount + string.characters.count - range.length
+        
+        // if the new length is greater than the maximum length (25)
+        if newLength <= 25 {
+            // update the character label
+            updateCharacterLabel(forCharacterCount: newLength)
+            // update the next button
+            updateNextButton(forCharacterCount: newLength)
+            // and replace the specified range
+            return true
+        }
+        // otherwise keep the old text
+        return false
+    }
+    
 }
