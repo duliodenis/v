@@ -170,6 +170,25 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // set the border background color
         border.backgroundColor = UIColor.lightGrayColor()
         
+        // set-up our constraints
+        let constraints:[NSLayoutConstraint] = [
+            // make the height of the new group button the same as that of the header view
+            newGroupButton.heightAnchor.constraintEqualToAnchor(header.heightAnchor),
+            // tie the new group button's trailing anchor to the header's trailing anchor
+            newGroupButton.trailingAnchor.constraintEqualToAnchor(header.layoutMarginsGuide.trailingAnchor),
+            // specify a height of 1 for the border view
+            border.heightAnchor.constraintEqualToConstant(1),
+            // constrain the border's leading & trailing anchor to the headers leading & trailing anchor
+            border.leadingAnchor.constraintEqualToAnchor(header.leadingAnchor),
+            border.trailingAnchor.constraintEqualToAnchor(header.trailingAnchor),
+            // and make the border's bottom anchor equal to the header's bottom anchor
+            border.bottomAnchor.constraintEqualToAnchor(header.bottomAnchor)
+        ]
+        
+        // activate the constraints
+        NSLayoutConstraint.activateConstraints(constraints)
+        
+        
         // return the header
         return header
     }
