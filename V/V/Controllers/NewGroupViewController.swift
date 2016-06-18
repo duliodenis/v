@@ -78,6 +78,18 @@ class NewGroupViewController: UIViewController {
         NSLayoutConstraint.activateConstraints(constraints)
     }
     
+    
+    // MARK: Navigation Bar Item Methods
+    
+    func cancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func next() {
+        
+    }
+    
 }
 
 
