@@ -57,6 +57,19 @@ class NewGroupParticipantsViewController: UIViewController {
         // shutoff autoresizing mask translation into constrains so we can set them thru auto layout
         contactImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Setup Auto Layout Constraints
+        let constraints: [NSLayoutConstraint] = [
+            // width & height is 20 less than the holder view to add a border to the sides & top/bottom
+            contactImageView.widthAnchor.constraintEqualToAnchor(holderView.widthAnchor, constant: -20),
+            contactImageView.heightAnchor.constraintEqualToAnchor(holderView.heightAnchor, constant: -20),
+            // center the contact image inside the holder view
+            contactImageView.centerXAnchor.constraintEqualToAnchor(holderView.centerXAnchor),
+            contactImageView.centerYAnchor.constraintEqualToAnchor(holderView.centerYAnchor)
+        ]
+        
+        // activate the constraints with the constraint array
+        NSLayoutConstraint.activateConstraints(constraints)
+        
         // return our searchField
         return searchField
     }
