@@ -57,6 +57,28 @@ class NewGroupParticipantsViewController: UIViewController {
         
         // use our UIVC extension to fill the view with our tableView
         fillViewWith(tableView)
+        
+        // ensure we have a valid context
+        if let context = context {
+            // use an NSFetchRequest to get the Contact instances back from Core Data
+            let request = NSFetchRequest(entityName: "Contact")
+            // sort the request by last name then first name with an array of sort descriptors
+            request.sortDescriptors = [
+                NSSortDescriptor(key: "lastName", ascending: true),
+                NSSortDescriptor(key: "firstName", ascending: true)
+            ]
+            
+            // use a do-catch statement to execute the fetch request to get the contacts back
+            do {
+                if let result = try context.executeFetchRequest(request) as? [Contact] {
+                    // update the display contacts with the result of the fetch request
+                    displayedContacts = result
+                }
+            } catch {
+                print("New Group Participants: there was a problem fetching")
+            }
+            
+        }
     }
     
     
