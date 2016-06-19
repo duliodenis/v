@@ -73,5 +73,20 @@ class NewGroupParticipantsViewController: UIViewController {
         // return our searchField
         return searchField
     }
+    
+    
+    // MARK: Dynamically Enable / Disable Right Bar Button Item
+    
+    private func showCreateButton(show: Bool) {
+        // if show is true: tint and enable the right bar button item
+        if show {
+            navigationItem.rightBarButtonItem?.tintColor = view.tintColor
+            navigationItem.rightBarButtonItem?.enabled = true
+        // otherwise update the tint and disable
+        } else {
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.lightGrayColor()
+            navigationItem.rightBarButtonItem?.enabled = false
+        }
+    }
 
 }
