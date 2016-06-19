@@ -22,6 +22,9 @@ class NewGroupParticipantsViewController: UIViewController {
     // tableView for search result items
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
     private let cellIdentifier = "ContactCell"
+    
+    // attribute to store all of our Contacts to be displayed
+    private var displayedContacts = [Contact]()
 
     
     override func viewDidLoad() {
@@ -41,6 +44,8 @@ class NewGroupParticipantsViewController: UIViewController {
         
         // register the tableView
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        // set the tableView data source to self
+        tableView.dataSource = self
         // set-up a UIView to have a footer view under the tableview
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
@@ -116,4 +121,29 @@ class NewGroupParticipantsViewController: UIViewController {
         }
     }
 
+}
+
+
+extension NewGroupParticipantsViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // use the number of displayed contacts as the number of rows in the tableView
+        return displayedContacts.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // make a cell for the indexPath in question
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        // get the contact at this indexPath.row
+        let contact = displayedContacts[indexPath.row]
+        
+        // assign the contact full name to the cell's text label
+        cell.textLabel?.text = contact.fullName
+        // set the selection style to none to remove highlighting
+        cell.selectionStyle = .None
+        // return the new cell
+        return cell
+    }
+    
 }
