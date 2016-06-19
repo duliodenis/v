@@ -18,6 +18,10 @@ class NewGroupParticipantsViewController: UIViewController {
     
     // Used to search for contacts
     private var searchField: UITextField!
+    
+    // tableView for search result items
+    private let tableView = UITableView(frame: CGRectZero, style: .Plain)
+    private let cellIdentifier = "ContactCell"
 
     
     override func viewDidLoad() {
@@ -25,6 +29,29 @@ class NewGroupParticipantsViewController: UIViewController {
         
         // set the title
         title = "Add Participants"
+        
+        // create the Nav Right Bar Button Item with a target action
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .Plain, target: self, action: "createChat")
+        // and set it to not show initially
+        showCreateButton(false)
+        
+        // the view controller should not automatically adjust its scroll views
+        // since we are inside a UI Navigation Controller
+        automaticallyAdjustsScrollViewInsets = false
+        
+        // register the tableView
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        // set-up a UIView to have a footer view under the tableview
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        // use our helper method to create the searchField
+        searchField = createSearchField()
+        
+        // make our searchField the tableView's header
+        tableView.tableHeaderView = searchField
+        
+        // use our UIVC extension to fill the view with our tableView
+        fillViewWith(tableView)
     }
     
     
