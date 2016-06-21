@@ -25,7 +25,11 @@ class NewGroupParticipantsViewController: UIViewController {
     
     // attribute to store all of our Contacts to be displayed
     private var displayedContacts = [Contact]()
-
+    // attribute that will contain a list of every Contact
+    private var allContacts = [Contact]()
+    // attribute that will contain the selected Contacts
+    private var selectedContacts = [Contact]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +55,8 @@ class NewGroupParticipantsViewController: UIViewController {
         
         // use our helper method to create the searchField
         searchField = createSearchField()
+        // and set the searchField delegate to ourself
+        searchField.delegate = self
         
         // make our searchField the tableView's header
         tableView.tableHeaderView = searchField
@@ -72,7 +78,7 @@ class NewGroupParticipantsViewController: UIViewController {
             do {
                 if let result = try context.executeFetchRequest(request) as? [Contact] {
                     // update the display contacts with the result of the fetch request
-                    displayedContacts = result
+                    allContacts = result
                 }
             } catch {
                 print("New Group Participants: there was a problem fetching")
@@ -142,6 +148,16 @@ class NewGroupParticipantsViewController: UIViewController {
             navigationItem.rightBarButtonItem?.enabled = false
         }
     }
+    
+    
+    // MARK: endSearch Function
+    
+    private func endSearch() {
+        // display only those contacts we selected
+        displayedContacts = selectedContacts
+        // reload the tableView
+        tableView.reloadData()
+    }
 
 }
 
@@ -166,6 +182,43 @@ extension NewGroupParticipantsViewController: UITableViewDataSource {
         cell.selectionStyle = .None
         // return the new cell
         return cell
+    }
+    
+}
+
+
+extension NewGroupParticipantsViewController: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        // use a guard statement to test that we have text
+        guard let currentText = textField.text else {
+            // if we don't have a value - end the search
+            endSearch()
+            return true
+        }
+        
+        // create a string variable by replacing current text with the strings in the range
+        let text = NSString(string: currentText).stringByReplacingCharactersInRange(range, withString: string)
+        
+        // if we don't have any characters in the resultant string then end the search
+        if text.characters.count == 0 {
+            endSearch()
+            return true
+        }
+        
+        // if we have characters call the filter method on the all contacts array
+        // and assign the result to the displayedContacts array
+        displayedContacts = allContacts.filter {
+            contact in
+            // iterate through each contact to determine if we have a match
+            let match = contact.fullName.rangeOfString(text) != nil
+            return match
+        }
+        
+        // reload the table view
+        tableView.reloadData()
+        return true
     }
     
 }
