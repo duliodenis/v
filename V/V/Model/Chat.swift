@@ -14,6 +14,14 @@ class Chat: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
+    
+    // Computed attribute to determine whether this instance is a Group Chat
+    
+    var isGroupChat: Bool {
+        return participants?.count > 1
+    }
+    
+    
     // Last Message Optional Computed Attribute
     
     var lastMessage: Message? {
