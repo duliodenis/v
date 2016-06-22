@@ -165,6 +165,22 @@ class NewGroupParticipantsViewController: UIViewController {
         tableView.reloadData()
     }
 
+    
+    // MARK: Create Chat Function
+    
+    func createChat() {
+        // ensure we have valid chat and context attributes
+        guard let chat = chat, context = context else { return }
+        
+        // update the chat partipant set with our array of selected contacts
+        chat.participants = NSSet(array: selectedContacts)
+        
+        // call the chat creation delegate
+        chatCreationDelegate?.created(chat: chat, inContext: context)
+        // and dismiss ourselves
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
 }
 
 
