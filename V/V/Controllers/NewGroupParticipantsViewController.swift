@@ -30,6 +30,9 @@ class NewGroupParticipantsViewController: UIViewController {
     // attribute that will contain the selected Contacts
     private var selectedContacts = [Contact]()
     
+    // is the user searching for a contact
+    private var isSearching = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +53,9 @@ class NewGroupParticipantsViewController: UIViewController {
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         // set the tableView data source to self
         tableView.dataSource = self
+        // and the tableView delegate to self
+        tableView.delegate = self
+        
         // set-up a UIView to have a footer view under the tableview
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
@@ -135,7 +141,7 @@ class NewGroupParticipantsViewController: UIViewController {
     }
     
     
-    // MARK: Dynamically Enable / Disable Right Bar Button Item
+    // MARK: Dynamically Enable / Disable the Create Right Bar Button Item
     
     private func showCreateButton(show: Bool) {
         // if show is true: tint and enable the right bar button item
@@ -163,6 +169,7 @@ class NewGroupParticipantsViewController: UIViewController {
 
 
 extension NewGroupParticipantsViewController: UITableViewDataSource {
+    // MARK: UITableViewDataSource Methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // use the number of displayed contacts as the number of rows in the tableView
@@ -187,9 +194,46 @@ extension NewGroupParticipantsViewController: UITableViewDataSource {
 }
 
 
+extension NewGroupParticipantsViewController: UITableViewDelegate {
+    // MARK: UITableViewDelegate Methods
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // highlight when user taps on a row
+        return true
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // if not searching return
+        guard isSearching else { return }
+        
+        // take the contact from the displayed contacts that was just tapped
+        let contact = displayedContacts[indexPath.row]
+        // make sure its not already in the selected contacts array
+        guard !selectedContacts.contains(contact) else { return }
+        // add it to the selected contacts array
+        selectedContacts.append(contact)
+        
+        // remove the selected contact from the pool of all contacts
+        allContacts.removeAtIndex(allContacts.indexOf(contact)!)
+        
+        // reset the search field with an empty string
+        searchField.text = ""
+        
+        // end the search and show the Create nav bar button
+        endSearch()
+        showCreateButton(true)
+    }
+}
+
+
 extension NewGroupParticipantsViewController: UITextFieldDelegate {
+    // MARK: UITextFieldDelegate Method
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        // the user is now searching
+        isSearching = true
         
         // use a guard statement to test that we have text
         guard let currentText = textField.text else {
