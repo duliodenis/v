@@ -31,37 +31,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // assign the context of the All Chats VC to this context we just setup
         allChatsViewController.context = context
         
-        // Seed Data into Core Data
-        seedData(context)
+        // import contacts into Core Data
+        importContacts(context)
         
         return true
     }
     
     
-    // MARK: Seed Data into Core Data
+    // MARK: Import Contacts into Core Data
     
-    func seedData(context: NSManagedObjectContext) {
+    func importContacts(context: NSManagedObjectContext) {
         
         // check to see if we have a DataSeeded key in user defaults
         let dataSeeded = NSUserDefaults.standardUserDefaults().boolForKey("DataSeeded")
         // if we've already seeded data fall through and do not seed again
         guard !dataSeeded else { return }
         
-        // create two people tuples of first and last names
-        let people = [("Nicole", "Grey"), ("Kate", "Brenner")]
-        // and insert two Contact entities out of these people into the Core Data  context
-        for person in people {
-            let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: context) as! Contact
-            contact.firstName = person.0
-            contact.lastName  = person.1
-        }
-        
-        // save the context
-        do {
-            try context.save()
-        } catch {
-            print("Error saving contacts.")
-        }
+        // fetch the user's contacts
+        let contactImporter = ContactImporter()
+        contactImporter.fetch()
         
         // update user defaults with a true value for seeded data key
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "DataSeeded")
