@@ -7,6 +7,7 @@
         <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="chats" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <entity name="Contact" representedClassName=".Contact" syncable="YES">
+        <attribute name="contactID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="participants" inverseEntity="Chat" syncable="YES"/>
@@ -20,7 +21,7 @@
     </entity>
     <elements>
         <element name="Chat" positionX="-54" positionY="18" width="128" height="105"/>
-        <element name="Contact" positionX="-54" positionY="27" width="128" height="105"/>
+        <element name="Contact" positionX="-54" positionY="27" width="128" height="120"/>
         <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
