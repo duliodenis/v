@@ -11,7 +11,14 @@ import CoreData
 import Contacts
 
 class ContactImporter {
+    
+    private var context: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
 
+    
     func fetch() {
         // create an instance of our CN Contact Store
         let store = CNContactStore()
@@ -32,7 +39,16 @@ class ContactImporter {
                     // execute the request
                     try store.enumerateContactsWithFetchRequest(request, usingBlock: {
                         cnContact, stop in
-                        print(cnContact)
+                        
+                        // make a Contact Core Data instance
+                        guard let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else { return }
+                        
+                        // and use the CNContact attribute values for the new contact object
+                        contact.firstName = cnContact.givenName
+                        contact.lastName = cnContact.familyName
+                        contact.contactID = cnContact.identifier
+                        
+                        print(contact)
                     })
                 } catch let error as NSError {
                     print(error)
