@@ -31,8 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // assign the context of the All Chats VC to this context we just setup
         allChatsViewController.context = context
         
-        // import contacts into Core Data
-        importContacts(context)
+        // setup a Private Dispatch Queue Context for the Contacts to work in its own thread
+        let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        // setup the persistent store coordinator for the contacts context
+        contactsContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
+        // call the import contacts with this private queue context
+        importContacts(contactsContext)
         
         return true
     }
@@ -48,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard !dataSeeded else { return }
         
         // fetch the user's contacts
-        let contactImporter = ContactImporter()
+        let contactImporter = ContactImporter(context: context)
         contactImporter.fetch()
         
         // update user defaults with a true value for seeded data key
