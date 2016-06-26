@@ -19,6 +19,15 @@ class ContactImporter {
     }
 
     
+    // MARK: Format Phone Numbers
+    
+    func formatPhoneNumber(number: CNPhoneNumber) -> String {
+        return number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+    }
+    
+    
+    // MARK: Fetch iOS Contacts
+    
     func fetch() {
         // create an instance of our CN Contact Store
         let store = CNContactStore()
