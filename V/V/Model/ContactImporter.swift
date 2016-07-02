@@ -59,8 +59,6 @@ class ContactImporter {
                             contact.lastName = cnContact.familyName
                             contact.contactID = cnContact.identifier
                             
-                            // create an NSMutableSet to hold our contact phone numbers
-                            let contactNumbers = NSMutableSet()
                             // loop through the values in the cnContact phone numbers
                             for cnValue in cnContact.phoneNumbers {
                                 // confirm the cnPhoneNumber exists
@@ -69,12 +67,14 @@ class ContactImporter {
                                 guard let phoneNumber = NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
                                 // update the value in Core Data by formating the cn phone number
                                 phoneNumber.value = self.formatPhoneNumber(cnPhoneNumber)
-                                // add the phone number to the NS Mutable Set of phone numbers
-                                contactNumbers.addObject(phoneNumber)
+                                // add the contact to the phoneNumber contact relationship for Core Data
+                                phoneNumber.contact = contact
                             }
-                            // update the contact set to be the contact phone numbers
-                            contact.phoneNumbers = contactNumbers
                         })
+                        
+                        // Save our context
+                        try self.context.save()
+                        
                     } catch let error as NSError {
                         print(error)
                     } catch {
