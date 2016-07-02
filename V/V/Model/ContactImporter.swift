@@ -36,49 +36,53 @@ class ContactImporter {
         store.requestAccessForEntityType(.Contacts, completionHandler: {
             granted, error in
             
-            // if access is granted by user
-            if granted {
-                do {
-                    // make a fetch request for first name, last name, and phone
-                    let request = CNContactFetchRequest(keysToFetch:
-                        [CNContactGivenNameKey,
-                            CNContactFamilyNameKey,
-                            CNContactPhoneNumbersKey])
-                    
-                    // execute the request
-                    try store.enumerateContactsWithFetchRequest(request, usingBlock: {
-                        cnContact, stop in
+            // ensure this doesn't run on the main thread
+            self.context.performBlock {
+                // if access is granted by user
+                if granted {
+                    do {
+                        // make a fetch request for first name, last name, and phone
+                        let request = CNContactFetchRequest(keysToFetch:
+                            [CNContactGivenNameKey,
+                                CNContactFamilyNameKey,
+                                CNContactPhoneNumbersKey])
                         
-                        // make a Contact Core Data instance
-                        guard let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else { return }
-                        
-                        // and use the CNContact attribute values for the new contact object
-                        contact.firstName = cnContact.givenName
-                        contact.lastName = cnContact.familyName
-                        contact.contactID = cnContact.identifier
-                        
-                        // create an NSMutableSet to hold our contact phone numbers
-                        let contactNumbers = NSMutableSet()
-                        // loop through the values in the cnContact phone numbers
-                        for cnValue in cnContact.phoneNumbers {
-                            // confirm the cnPhoneNumber exists
-                            guard let cnPhoneNumber = cnValue.value as? CNPhoneNumber else { continue }
-                            // confirm we can generate a Core Data phone number instance
-                            guard let phoneNumber = NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
-                            // update the value in Core Data by formating the cn phone number
-                            phoneNumber.value = self.formatPhoneNumber(cnPhoneNumber)
-                            // add the phone number to the NS Mutable Set of phone numbers
-                            contactNumbers.addObject(phoneNumber)
-                        }
-                        // update the contact set to be the contact phone numbers 
-                        contact.phoneNumbers = contactNumbers
-                    })
-                } catch let error as NSError {
-                    print(error)
-                } catch {
-                    print("Error with request in do-catch")
+                        // execute the request
+                        try store.enumerateContactsWithFetchRequest(request, usingBlock: {
+                            cnContact, stop in
+                            
+                            // make a Contact Core Data instance
+                            guard let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else { return }
+                            
+                            // and use the CNContact attribute values for the new contact object
+                            contact.firstName = cnContact.givenName
+                            contact.lastName = cnContact.familyName
+                            contact.contactID = cnContact.identifier
+                            
+                            // create an NSMutableSet to hold our contact phone numbers
+                            let contactNumbers = NSMutableSet()
+                            // loop through the values in the cnContact phone numbers
+                            for cnValue in cnContact.phoneNumbers {
+                                // confirm the cnPhoneNumber exists
+                                guard let cnPhoneNumber = cnValue.value as? CNPhoneNumber else { continue }
+                                // confirm we can generate a Core Data phone number instance
+                                guard let phoneNumber = NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
+                                // update the value in Core Data by formating the cn phone number
+                                phoneNumber.value = self.formatPhoneNumber(cnPhoneNumber)
+                                // add the phone number to the NS Mutable Set of phone numbers
+                                contactNumbers.addObject(phoneNumber)
+                            }
+                            // update the contact set to be the contact phone numbers
+                            contact.phoneNumbers = contactNumbers
+                        })
+                    } catch let error as NSError {
+                        print(error)
+                    } catch {
+                        print("Error with request in do-catch")
+                    }
                 }
             }
+            
         })
     }
     
