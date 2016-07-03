@@ -10,12 +10,29 @@ import Foundation
 import CoreData
 import Contacts
 
-class ContactImporter {
+class ContactImporter: NSObject {
     
     private var context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
         self.context = context
+    }
+    
+    
+    // MARK: Contact Authorization Change Add Observer
+    //       Function Responsible for Listening for Changes to the Authorization to Contacts
+    
+    func listenForChanges() {
+        // authorization satus for Contacts
+        CNContactStore.authorizationStatusForEntityType(.Contacts)
+        // Add Observer for CNContactStoreDidChangeNotification and call adddressBookDidChange()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addressBookDidChange:", name: CNContactStoreDidChangeNotification, object: nil)
+
+    }
+    
+    
+    func adddressBookDidChange(notification: NSNotification) {
+        print(notification)
     }
 
     
