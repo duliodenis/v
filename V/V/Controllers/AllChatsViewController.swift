@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate {
+class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate, ContextViewController {
 
     var context: NSManagedObjectContext?
     private var fetchedResultsController: NSFetchedResultsController?
