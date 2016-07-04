@@ -40,6 +40,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // listen for changes
         contactImporter?.listenForChanges()
         
+        // generate an instance of a tab bar controller
+        let tabController = UITabBarController()
+        
+        // set-up an array of tuple instances of view controller data
+        let vcData: [(UIViewController, UIImage)] = [
+            (AllChatsViewController(), UIImage(named: "chat_icon")!)
+        ]
+        
+        // use map closure method to create an array of UINavigationController instances
+        let viewControllers = vcData.map {
+            (vc: UIViewController, image: UIImage) -> UINavigationController in
+            // set-up the context of each ViewController using the ContextVC Protocol
+            if var vc = vc as? ContextViewController {
+                vc.context = mainContext
+            }
+            // for each nav controller we set its root VC
+            let nav = UINavigationController(rootViewController: vc)
+            // and its image
+            nav.tabBarItem.image = image
+            // and return the NavController
+            return nav
+        }
+        
+        tabController.viewControllers = viewControllers
+        window?.rootViewController = tabController
+        
         return true
     }
     
