@@ -13,6 +13,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    // private optional contact importer
+    private var contactImporter: ContactImporter?
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
@@ -35,8 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         // setup the persistent store coordinator for the contacts context
         contactsContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
+        
+        // initialize contact importer
+        contactImporter = ContactImporter(context: context)
+        
         // call the import contacts with this private queue context
         importContacts(contactsContext)
+        
+        // listen for changes
+        contactImporter?.listenForChanges()
         
         return true
     }
@@ -52,8 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard !dataSeeded else { return }
         
         // fetch the user's contacts
-        let contactImporter = ContactImporter(context: context)
-        contactImporter.fetch()
+        contactImporter?.fetch()
         
         // update user defaults with a true value for seeded data key
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "DataSeeded")
