@@ -140,6 +140,10 @@ class AllChatsViewController: UIViewController, TableViewFetchedResultsDisplayer
         // assign the context and chat attributes which are passed to us to the new ChatVC
         vc.context = context
         vc.chat = chat
+        
+        // hide tabBarController
+        vc.hidesBottomBarWhenPushed = true
+        
         // display the new ChatVC with a nav pushVC
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -294,6 +298,9 @@ extension AllChatsViewController: UITableViewDelegate {
         // set the context and the chat of the Next View Controller
         nextVC.context = context
         nextVC.chat = chat
+        
+        // hide tabBarController
+        nextVC.hidesBottomBarWhenPushed = true
         
         // present the Next VC by pushing into the navigation controller
         navigationController?.pushViewController(nextVC, animated: true)
