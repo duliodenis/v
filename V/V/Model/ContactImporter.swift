@@ -14,6 +14,9 @@ class ContactImporter: NSObject {
     
     private var context: NSManagedObjectContext
     
+    // Private optional time variable of last CNContact Notification
+    private var lastCNContactNotificationTime: NSDate?
+    
     init(context: NSManagedObjectContext) {
         self.context = context
     }
@@ -33,6 +36,12 @@ class ContactImporter: NSObject {
     
     func adddressBookDidChange(notification: NSNotification) {
         print(notification)
+        // get current date and time
+        let now = NSDate()
+        // test if either last contact notification time is nil or if time interval is > than 1
+        guard lastCNContactNotificationTime == nil || now.timeIntervalSinceDate(lastCNContactNotificationTime!) > 1 else { return }
+        // update last notification time to now
+        lastCNContactNotificationTime = now
     }
 
     
