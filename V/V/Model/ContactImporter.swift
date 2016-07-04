@@ -35,13 +35,15 @@ class ContactImporter: NSObject {
     
     
     func adddressBookDidChange(notification: NSNotification) {
-        print(notification)
         // get current date and time
         let now = NSDate()
         // test if either last contact notification time is nil or if time interval is > than 1
         guard lastCNContactNotificationTime == nil || now.timeIntervalSinceDate(lastCNContactNotificationTime!) > 1 else { return }
         // update last notification time to now
         lastCNContactNotificationTime = now
+        
+        // fetch iOS Contacts
+        fetch()
     }
 
     
@@ -49,6 +51,40 @@ class ContactImporter: NSObject {
     
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
         return number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+    }
+    
+    
+    // MARK: Private function to fetch both existing contacts and phone numbers as a tuple of dictionaries
+    
+    private func fetchExisting() -> (contacts: [String: Contact], phoneNumbers: [String: PhoneNumber]) {
+        // initialize new contacts and phone number dictionaries
+        var contacts = [String: Contact]()
+        var phoneNumbers = [String: PhoneNumber]()
+        
+        // do-catch to request our contact instances from Core Data
+        do {
+            // instantiate a Core Data request for Contacts
+            let request = NSFetchRequest(entityName: "Contact")
+            // and specify a prefetch for related phoneNumbers
+            request.relationshipKeyPathsForPrefetching = ["phoneNumbers"]
+            // execute the request
+            if let contactsResults = try self.context.executeFetchRequest(request) as? [Contact] {
+                // iterate thru the contacts
+                for contact in contactsResults {
+                    // making contacts
+                    contacts[contact.contactID!] = contact
+                    // and phone numbers
+                    for phoneNumber in contact.phoneNumbers! {
+                        phoneNumbers[phoneNumber.value] = phoneNumber as? PhoneNumber
+                    }
+                }
+            }
+            
+        } catch {
+            print("Error")
+        }
+        // return contacts and phoneNumbers dictionaries as a tuple
+        return (contacts, phoneNumbers)
     }
     
     
@@ -67,6 +103,9 @@ class ContactImporter: NSObject {
                 // if access is granted by user
                 if granted {
                     do {
+                        // use tuple destructuring to get existing contacts and phone numbers
+                        let (contacts, phoneNumbers) = self.fetchExisting()
+                        
                         // make a fetch request for first name, last name, and phone
                         let request = CNContactFetchRequest(keysToFetch:
                             [CNContactGivenNameKey,
@@ -77,8 +116,8 @@ class ContactImporter: NSObject {
                         try store.enumerateContactsWithFetchRequest(request, usingBlock: {
                             cnContact, stop in
                             
-                            // make a Contact Core Data instance
-                            guard let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else { return }
+                            // make a Contact Core Data instance (if it doesn't already exisit)
+                            guard let contact = contacts[cnContact.identifier] ?? NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else { return }
                             
                             // and use the CNContact attribute values for the new contact object
                             contact.firstName = cnContact.givenName
@@ -90,7 +129,8 @@ class ContactImporter: NSObject {
                                 // confirm the cnPhoneNumber exists
                                 guard let cnPhoneNumber = cnValue.value as? CNPhoneNumber else { continue }
                                 // confirm we can generate a Core Data phone number instance
-                                guard let phoneNumber = NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
+                                // make a phoneNumber Core Data instance (if it doesn't already exist)
+                                guard let phoneNumber = phoneNumbers[cnPhoneNumber.stringValue] ?? NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
                                 // update the value in Core Data by formating the cn phone number
                                 phoneNumber.value = self.formatPhoneNumber(cnPhoneNumber)
                                 // add the contact to the phoneNumber contact relationship for Core Data
