@@ -23,7 +23,7 @@ class ContactImporter: NSObject {
     //       Function Responsible for Listening for Changes to the Authorization to Contacts
     
     func listenForChanges() {
-        // authorization satus for Contacts
+        // authorization status for Contacts
         CNContactStore.authorizationStatusForEntityType(.Contacts)
         // Add Observer for CNContactStoreDidChangeNotification and call adddressBookDidChange()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addressBookDidChange:", name: CNContactStoreDidChangeNotification, object: nil)
