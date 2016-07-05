@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // set-up an array of tuple instances of view controller data
         let vcData: [(UIViewController, UIImage)] = [
+            (ContactsViewController(), UIImage(named: "contact_icon")!),
             (AllChatsViewController(), UIImage(named: "chat_icon")!)
         ]
         
