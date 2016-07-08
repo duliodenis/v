@@ -85,12 +85,3 @@ class TableViewFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDeleg
     }
 
 }
-
-
-// Conforming to this protocol will require implementing the configure cell method
-
-protocol TableViewFetchedResultsDisplayer {
-    
-    // the Configure Cell Helper Method takes a UITableViewCell and an indexPath
-    func configureCell(cell: UITableViewCell, atIndexPath: NSIndexPath)
-}
