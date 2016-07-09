@@ -13,5 +13,5 @@ import UIKit
 protocol TableViewFetchedResultsDisplayer {
     
     // the Configure Cell Helper Method takes a UITableViewCell and an indexPath
-    func configureCell(cell: UITableViewCell, atIndexPath: NSIndexPath)
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath)
 }
