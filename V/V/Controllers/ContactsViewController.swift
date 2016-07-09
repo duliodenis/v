@@ -70,3 +70,13 @@ class ContactsViewController: UIViewController, ContextViewController {
     }
 
 }
+
+
+extension ContactsViewController: TableViewFetchedResultsDisplayer {
+    
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact
+            else { return }
+        cell.textLabel?.text = contact.fullName
+    }
+}
