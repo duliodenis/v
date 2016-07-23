@@ -13,6 +13,8 @@ class ContactsSearchResultsController: UITableViewController {
     
     private var filteredContacts = [Contact]()
     
+    var contactSelector: ContactSelector?
+    
     var contacts = [Contact]() {
         // every time we update contacts
         // we'll also update the filteredContacts

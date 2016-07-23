@@ -11,7 +11,7 @@ import CoreData
 import Contacts
 import ContactsUI
 
-class ContactsViewController: UIViewController, ContextViewController {
+class ContactsViewController: UIViewController, ContextViewController, ContactSelector {
 
     // in order to fulfill the ContextVC Protocol
     var context: NSManagedObjectContext?
@@ -69,6 +69,11 @@ class ContactsViewController: UIViewController, ContextViewController {
         
         // Initialize an instance of Contacts Search Results Controller
         let resultsVC = ContactsSearchResultsController()
+        
+        // set ourself as the contact selector delegate to receive 
+        // callbacks from ContactsSearchResultController
+        resultsVC.contactSelector = self
+        
         // and update the contacts attribute with the fetched results controller
         resultsVC.contacts = fetchedResultsController?.fetchedObjects as! [Contact]
         
