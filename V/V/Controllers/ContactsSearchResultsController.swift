@@ -61,7 +61,8 @@ class ContactsSearchResultsController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let contact = filteredContacts[indexPath.row]
-        
+        // call our delegate (the Contacts VC to present the contact in a CNContactViewController
+        contactSelector?.selectedContact(contact)
     }
 
     /*

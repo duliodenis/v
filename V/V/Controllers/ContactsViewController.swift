@@ -90,9 +90,38 @@ class ContactsViewController: UIViewController, ContextViewController, ContactSe
         
     }
     
-    
+
     func newContact() {
         print("New Contact")
+    }
+    
+    
+    func selectedContact(contact: Contact) {
+        // confirm the contact has a contact ID
+        guard let id = contact.contactID else { return }
+        
+        // generate a Contact Store instance
+        let store = CNContactStore()
+        // and a Contact constant
+        let cnContact: CNContact
+        
+        // use a do-catch statement to attempt to create a contact from our store
+        do {
+            cnContact = try store.unifiedContactWithIdentifier(id, keysToFetch: [CNContactViewController.descriptorForRequiredKeys()])
+        } catch {
+            return
+        }
+        
+        // instantiate a ContactsUI Contact VC for the Contact
+        let vc = CNContactViewController(forContact: cnContact)
+        // hide the tab bar
+        vc.hidesBottomBarWhenPushed = true
+        
+        // push the Contact VC into the Navigation stack to present it
+        navigationController?.pushViewController(vc, animated: true)
+        
+        // and deactivate the search controller
+        searchController?.active = false
     }
 
 }
