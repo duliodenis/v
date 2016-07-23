@@ -36,8 +36,9 @@ class ContactsViewController: UIViewController, ContextViewController, ContactSe
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
-        // set ourself to be the data source's delegate
+        // set ourself to be the tableView's delegate and tableView's data source delegate
         tableView.dataSource = self
+        tableView.delegate = self
         
         fillViewWith(tableView)
         
@@ -149,6 +150,21 @@ extension ContactsViewController: UITableViewDataSource {
         guard let sections = fetchedResultsController?.sections else { return nil }
         let currentSection = sections[section]
         return currentSection.name
+    }
+}
+
+
+extension ContactsViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else { return }
+        selectedContact(contact)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
