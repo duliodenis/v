@@ -108,3 +108,26 @@ class ContactsSearchResultsController: UITableViewController {
     */
 
 }
+
+
+extension ContactsSearchResultsController: UISearchResultsUpdating {
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        // when the search bar becomes active lets make sure we have some search text
+        guard let searchText = searchController.searchBar.text else { return }
+        // confirm that we have some characters
+        if searchText.characters.count > 0 {
+            // update the filtered contacts array by calling the filter method on the contacts arrary
+            filteredContacts = contacts.filter {
+                // iterate and use range of string to see if we have a match with the search string
+                $0.fullName.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+            }
+        } else {
+            // update filtered contacts with contacts if there are no characters in the search text
+            filteredContacts = contacts
+        }
+        // reload the tableView
+        tableView.reloadData()
+    }
+    
+}
