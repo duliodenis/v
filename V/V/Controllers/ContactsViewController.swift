@@ -22,6 +22,8 @@ class ContactsViewController: UIViewController, ContextViewController {
     private var fetchedResultsController: NSFetchedResultsController?
     private var fetchedResultsDelegate: NSFetchedResultsControllerDelegate?
     
+    private var searchController: UISearchController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +66,22 @@ class ContactsViewController: UIViewController, ContextViewController {
                 print("ContactsViewController: There was a problem fetching.")
             }
         }
+        
+        // Initialize an instance of Contacts Search Results Controller
+        let resultsVC = ContactsSearchResultsController()
+        // and update the contacts attribute with the fetched results controller
+        resultsVC.contacts = fetchedResultsController?.fetchedObjects as! [Contact]
+        
+        // initialize our search controller with the instance of the Contacts Search Results Controller
+        searchController = UISearchController(searchResultsController: resultsVC)
+        // we update the search results updater attribute also to be the resultsVC
+        searchController?.searchResultsUpdater = resultsVC
+        
+        // and allow the searchcontroller to dynamically present itself over the Contacts VC
+        definesPresentationContext = true
+        
+        // update the table header view with our search controller search bar
+        tableView.tableHeaderView = searchController?.searchBar
         
     }
     
