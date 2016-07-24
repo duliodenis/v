@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // private optional contact importer
     private var contactImporter: ContactImporter?
+    
+    // private optional context sync manager for Contact syncing
+    private var contactsSyncer: ContextSyncManager?
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
@@ -30,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         // setup the persistent store coordinator for the contacts context
         contactsContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
+        
+        // initialize contacts syncer with main context and contacts context
+        contactsSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: contactsContext)
         
         // initialize contact importer
         contactImporter = ContactImporter(context: contactsContext)
