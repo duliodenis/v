@@ -20,6 +20,26 @@ class ContextSyncManager: NSObject {
         self.backgroundContext = backgroundContext
         
         super.init()
+        
+        // Add two observers to watch for Save Notifications to the main and background contexts
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("mainContextSaved:"), name: NSManagedObjectContextDidSaveNotification, object: mainContext)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("backgroundContextSaved:"), name: NSManagedObjectContextDidSaveNotification, object: backgroundContext)
+    }
+    
+    
+    func mainContextSaved(notification: NSNotification) {
+        backgroundContext.performBlock({
+            self.backgroundContext.mergeChangesFromContextDidSaveNotification(notification)
+        })
+    }
+    
+    
+    func backgroundContextSaved(notification: NSNotification) {
+        mainContext.performBlock({
+            self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
+        })
     }
     
 }
