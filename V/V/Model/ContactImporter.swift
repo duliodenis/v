@@ -30,11 +30,10 @@ class ContactImporter: NSObject {
         CNContactStore.authorizationStatusForEntityType(.Contacts)
         // Add Observer for CNContactStoreDidChangeNotification and call adddressBookDidChange()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addressBookDidChange:", name: CNContactStoreDidChangeNotification, object: nil)
-
     }
     
     
-    func adddressBookDidChange(notification: NSNotification) {
+    func addressBookDidChange(notification: NSNotification) {
         // get current date and time
         let now = NSDate()
         // test if either last contact notification time is nil or if time interval is > than 1

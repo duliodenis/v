@@ -93,7 +93,12 @@ class ContactsViewController: UIViewController, ContextViewController, ContactSe
     
 
     func newContact() {
-        print("New Contact")
+        // instantiate a new CN Contact VC
+        let newContactVC = CNContactViewController(forNewContact: nil)
+        // set the delegate attribute of the new VC to ourself to receive callbacks
+        newContactVC.delegate = self
+        // push the new VC onto the Nav stack
+        navigationController?.pushViewController(newContactVC, animated: true)
     }
     
     
@@ -176,4 +181,17 @@ extension ContactsViewController: TableViewFetchedResultsDisplayer {
             else { return }
         cell.textLabel?.text = contact.fullName
     }
+}
+
+
+extension ContactsViewController: CNContactViewControllerDelegate {
+    
+    func contactViewController(viewController: CNContactViewController, didCompleteWithContact contact: CNContact?) {
+        // if the user cancelled (no contact) - pop the view controller and return
+        if contact == nil {
+            navigationController?.popViewControllerAnimated(true)
+            return
+        }
+    }
+    
 }
