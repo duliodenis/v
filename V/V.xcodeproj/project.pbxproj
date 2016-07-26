@@ -36,6 +36,7 @@
 		6CA5F0F91D407A580054DD0F /* ContactsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F0F81D407A580054DD0F /* ContactsSearchResultsController.swift */; };
 		6CA5F0FB1D43A84E0054DD0F /* ContactSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F0FA1D43A84E0054DD0F /* ContactSelector.swift */; };
 		6CA5F0FD1D4525140054DD0F /* ContextSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F0FC1D4525140054DD0F /* ContextSyncManager.swift */; };
+		6CA5F1001D470C9C0054DD0F /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA5F0FF1D470C9C0054DD0F /* FavoriteCell.swift */; };
 		6CB57DF61CC58BFA00307103 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */; };
 		6CBEF9B41CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBEF9B31CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift */; };
 		6CBEF9B81CFB482E00064D51 /* UIViewController+FillViewWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBEF9B71CFB482E00064D51 /* UIViewController+FillViewWith.swift */; };
@@ -75,6 +76,7 @@
 		6CA5F0F81D407A580054DD0F /* ContactsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactsSearchResultsController.swift; path = Controllers/ContactsSearchResultsController.swift; sourceTree = "<group>"; };
 		6CA5F0FA1D43A84E0054DD0F /* ContactSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactSelector.swift; path = Protocols/ContactSelector.swift; sourceTree = "<group>"; };
 		6CA5F0FC1D4525140054DD0F /* ContextSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextSyncManager.swift; path = Model/ContextSyncManager.swift; sourceTree = "<group>"; };
+		6CA5F0FF1D470C9C0054DD0F /* FavoriteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = Views/FavoriteCell.swift; sourceTree = "<group>"; };
 		6CB57DF51CC58BFA00307103 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Scroll.swift"; path = "Extensions/UITableView+Scroll.swift"; sourceTree = "<group>"; };
 		6CBEF9B31CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewFetchedResultsDelegate.swift; path = Model/TableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		6CBEF9B71CFB482E00064D51 /* UIViewController+FillViewWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+FillViewWith.swift"; path = "Controllers/UIViewController+FillViewWith.swift"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				6C3FEDA01D13095C00E76E8B /* AllChatsVC */,
 				6C3FEDA11D13097F00E76E8B /* ChatVC */,
+				6CA5F0FE1D470C700054DD0F /* FavoriteCell */,
 				6CA4AF501CF3F5A900E683DE /* NewChatViewController.swift */,
 				6C3FEDA31D15D85700E76E8B /* NewGroupViewController.swift */,
 				6C3FEDA71D1612F200E76E8B /* NewGroupParticipantsViewController.swift */,
@@ -212,6 +215,14 @@
 				6CA5F0FC1D4525140054DD0F /* ContextSyncManager.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		6CA5F0FE1D470C700054DD0F /* FavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				6CA5F0FF1D470C9C0054DD0F /* FavoriteCell.swift */,
+			);
+			name = FavoriteCell;
 			sourceTree = "<group>";
 		};
 		6CB57DF41CC58BC700307103 /* Extensions */ = {
@@ -323,6 +334,7 @@
 				6CA5F0FD1D4525140054DD0F /* ContextSyncManager.swift in Sources */,
 				6C4CC58D1CBC701C00905D99 /* AppDelegate.swift in Sources */,
 				6CBEF9B81CFB482E00064D51 /* UIViewController+FillViewWith.swift in Sources */,
+				6CA5F1001D470C9C0054DD0F /* FavoriteCell.swift in Sources */,
 				6CBEF9C21CFB788E00064D51 /* ChatCreationDelegate.swift in Sources */,
 				6CA5F0D71D2C6E0E0054DD0F /* ContactsViewController.swift in Sources */,
 			);
