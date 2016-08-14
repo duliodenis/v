@@ -23,10 +23,10 @@
 		6C4CC5941CBC701C00905D99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5931CBC701C00905D99 /* Assets.xcassets */; };
 		6C4CC5971CBC701C00905D99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5951CBC701C00905D99 /* LaunchScreen.storyboard */; };
 		6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */; };
+		6C5415501D60D63A0034F8CF /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C54154E1D60D63A0034F8CF /* Contact+CoreDataProperties.swift */; };
+		6C5415511D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
-		6C5D73A91D20283E00BDA857 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A61D20283E00BDA857 /* Contact+CoreDataProperties.swift */; };
-		6C5D73AA1D20283E00BDA857 /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A71D20283E00BDA857 /* PhoneNumber+CoreDataProperties.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
 		6CA4AF261CF118A900E683DE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4AF241CF118A900E683DE /* Contact.swift */; };
 		6CA4AF511CF3F5A900E683DE /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4AF501CF3F5A900E683DE /* NewChatViewController.swift */; };
@@ -64,10 +64,10 @@
 		6C4CC5961CBC701C00905D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C4CC5981CBC701C00905D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C4CC5A21CBC70AB00905D99 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/ChatViewController.swift; sourceTree = "<group>"; };
+		6C54154E1D60D63A0034F8CF /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "Model/Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "Model/PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
-		6C5D73A61D20283E00BDA857 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "Model/Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		6C5D73A71D20283E00BDA857 /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "Model/PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
 		6CA4AF241CF118A900E683DE /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = Model/Contact.swift; sourceTree = "<group>"; };
 		6CA4AF501CF3F5A900E683DE /* NewChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChatViewController.swift; path = Controllers/NewChatViewController.swift; sourceTree = "<group>"; };
@@ -210,10 +210,10 @@
 				6CA4AF241CF118A900E683DE /* Contact.swift */,
 				6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */,
 				6C27CE7E1CE8D13100C42FB4 /* Model.xcdatamodeld */,
-				6CBEFA451D0D8F1C00064D51 /* Message+CoreDataProperties.swift */,
 				6C3FEDA51D160E6100E76E8B /* Chat+CoreDataProperties.swift */,
-				6C5D73A61D20283E00BDA857 /* Contact+CoreDataProperties.swift */,
-				6C5D73A71D20283E00BDA857 /* PhoneNumber+CoreDataProperties.swift */,
+				6C54154E1D60D63A0034F8CF /* Contact+CoreDataProperties.swift */,
+				6CBEFA451D0D8F1C00064D51 /* Message+CoreDataProperties.swift */,
+				6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */,
 				6CA5F0FC1D4525140054DD0F /* ContextSyncManager.swift */,
 			);
 			name = Model;
@@ -321,8 +321,6 @@
 				6C3FEDA61D160E6100E76E8B /* Chat+CoreDataProperties.swift in Sources */,
 				6C3FEDA81D1612F200E76E8B /* NewGroupParticipantsViewController.swift in Sources */,
 				6CA4AF511CF3F5A900E683DE /* NewChatViewController.swift in Sources */,
-				6C5D73AA1D20283E00BDA857 /* PhoneNumber+CoreDataProperties.swift in Sources */,
-				6C5D73A91D20283E00BDA857 /* Contact+CoreDataProperties.swift in Sources */,
 				6C27CE891CE8EDB400C42FB4 /* Chat.swift in Sources */,
 				6CA4AF261CF118A900E683DE /* Contact.swift in Sources */,
 				6C27CE921CEBC50F00C42FB4 /* AllChatsViewController.swift in Sources */,
@@ -330,9 +328,11 @@
 				6CA5F1021D47A2130054DD0F /* FavoritesViewController.swift in Sources */,
 				6C27CE7D1CE8CBC100C42FB4 /* CoreDataStack.swift in Sources */,
 				6C27CE841CE8D7EF00C42FB4 /* Message.swift in Sources */,
+				6C5415501D60D63A0034F8CF /* Contact+CoreDataProperties.swift in Sources */,
 				6C3FEDA41D15D85700E76E8B /* NewGroupViewController.swift in Sources */,
 				6C4CC5A31CBC70AB00905D99 /* ChatViewController.swift in Sources */,
 				6CA5F0FB1D43A84E0054DD0F /* ContactSelector.swift in Sources */,
+				6C5415511D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift in Sources */,
 				6CA5F0F91D407A580054DD0F /* ContactsSearchResultsController.swift in Sources */,
 				6CBEFA471D0D8F1C00064D51 /* Message+CoreDataProperties.swift in Sources */,
 				6CA5F0FD1D4525140054DD0F /* ContextSyncManager.swift in Sources */,
