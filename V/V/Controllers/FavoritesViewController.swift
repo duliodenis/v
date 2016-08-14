@@ -23,6 +23,19 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
     private let store = CNContactStore()
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Favorites"
+        
+        automaticallyAdjustsScrollViewInsets = false
+        tableView.registerClass(FavoriteCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        fillViewWith(tableView)
+    }
+    
+    
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         // get the relevant contact back from the fetched results controller 
         // using the object at index path method
