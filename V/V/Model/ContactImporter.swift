@@ -135,6 +135,11 @@ class ContactImporter: NSObject {
                                 // add the contact to the phoneNumber contact relationship for Core Data
                                 phoneNumber.contact = contact
                             }
+                            
+                            // if the contact is inserted set the favorite attribute to true
+                            if contact.inserted {
+                                contact.favorite = true
+                            }
                         })
                         
                         // Save our context
