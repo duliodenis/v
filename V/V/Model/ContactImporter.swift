@@ -130,6 +130,8 @@ class ContactImporter: NSObject {
                                 // confirm we can generate a Core Data phone number instance
                                 // make a phoneNumber Core Data instance (if it doesn't already exist)
                                 guard let phoneNumber = phoneNumbers[cnPhoneNumber.stringValue] ?? NSEntityDescription.insertNewObjectForEntityForName("PhoneNumber", inManagedObjectContext: self.context) as? PhoneNumber else { continue }
+                                // localize cnValue's label field and set it to kind (ex: home, work, ...)
+                                phoneNumber.kind = CNLabeledValue.localizedStringForLabel(cnValue.label)
                                 // update the value in Core Data by formating the cn phone number
                                 phoneNumber.value = self.formatPhoneNumber(cnPhoneNumber)
                                 // add the contact to the phoneNumber contact relationship for Core Data
