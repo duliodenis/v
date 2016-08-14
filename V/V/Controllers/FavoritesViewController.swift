@@ -42,6 +42,10 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
             // set a fetch request for our contact instances
             let request = NSFetchRequest(entityName: "Contact")
             
+            // constrain the request with a predicate that only pulls contact instances
+            // where the favorite attribute is true
+            request.predicate = NSPredicate(format: "favorite = true")
+            
             // set-up sort descriptors for last name and first name
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
                                        NSSortDescriptor(key: "firstName", ascending: true)]
@@ -73,8 +77,17 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         
         // if it is update the textlabel, detail text label, phone type label
         cell.textLabel?.text = contact.fullName
-        cell.detailTextLabel?.text = "*** No Status ***"
-        cell.phoneTypeLabel.text = "mobile"
+        cell.detailTextLabel?.text = contact.status ?? "*** No Status ***"
+        // get the contact phone numbers attribute and filter the Set
+        cell.phoneTypeLabel.text = contact.phoneNumbers?.filter({
+            // get the number in the closure
+            number in
+            // confirm it is a PhoneNumber type
+            guard let number = number as? PhoneNumber else {return false}
+            // and return the registered numbers
+            return number.registered
+        // only getting the first's kind (mobile, home, etc)
+        }).first?.kind
         
         // add an accessory type using the Detail Button enum type
         cell.accessoryType = .DetailButton
