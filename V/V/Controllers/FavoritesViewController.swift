@@ -32,6 +32,8 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         tableView.registerClass(FavoriteCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
+        tableView.dataSource = self
+        
         fillViewWith(tableView)
         
         // confirm we have a context
@@ -78,3 +80,35 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
     }
     
 }
+
+
+extension FavoritesViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = fetchedResultsController?.sections else {return 0}
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else {return nil}
+        let currentSection = sections[section]
+        return currentSection.name
+    }
+    
+}
+
+
