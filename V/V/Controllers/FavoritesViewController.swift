@@ -33,6 +33,30 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
         fillViewWith(tableView)
+        
+        // confirm we have a context
+        if let context = context {
+            // set a fetch request for our contact instances
+            let request = NSFetchRequest(entityName: "Contact")
+            
+            // set-up sort descriptors for last name and first name
+            request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
+                                       NSSortDescriptor(key: "firstName", ascending: true)]
+            
+            // generate the fetched results controller instance using the request and context
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            
+            // use the tableview fetched results delegate with out tableview to set the delegate
+            fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)
+            fetchedResultsController?.delegate = fetchedResultsDelegate
+            
+            // use a do-catch statement to attempt to perform a fetch on the fetched results controller
+            do {
+                try fetchedResultsController?.performFetch()
+            } catch {
+                print("FavoritesVC: There was a problem fetching.")
+            }
+        }
     }
     
     
