@@ -33,6 +33,7 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
         tableView.dataSource = self
+        tableView.delegate = self
         
         fillViewWith(tableView)
         
@@ -112,3 +113,14 @@ extension FavoritesViewController: UITableViewDataSource {
 }
 
 
+extension FavoritesViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
+    }
+    
+}
