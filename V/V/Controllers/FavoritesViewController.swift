@@ -78,6 +78,10 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         // if it is update the textlabel, detail text label, phone type label
         cell.textLabel?.text = contact.fullName
         cell.detailTextLabel?.text = contact.status ?? "*** No Status ***"
+
+        // Show the the first of its kind and ignore the registered attribute
+        // cell.phoneTypeLabel.text = contact.phoneNumbers?.allObjects.first?.kind
+        
         // get the contact phone numbers attribute and filter the Set
         cell.phoneTypeLabel.text = contact.phoneNumbers?.filter({
             // get the number in the closure
