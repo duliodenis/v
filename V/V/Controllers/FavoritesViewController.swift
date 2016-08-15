@@ -28,6 +28,8 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
         
         title = "Favorites"
         
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
         automaticallyAdjustsScrollViewInsets = false
         tableView.registerClass(FavoriteCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -63,6 +65,35 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
             } catch {
                 print("FavoritesVC: There was a problem fetching.")
             }
+        }
+    }
+    
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing {
+            tableView.setEditing(true, animated: true)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .Plain, target: self, action: "deleteAll")
+        } else {
+            tableView.setEditing(false, animated: true)
+            navigationItem.rightBarButtonItem = nil
+            guard let context = context where context.hasChanges else {return}
+            
+            do {
+                try context.save()
+            } catch {
+                print("FavoritesViewController: Error Saving Favorites.")
+            }
+        }
+    }
+    
+    
+    func deleteAll() {
+        guard let contacts = fetchedResultsController?.fetchedObjects as? [Contact] else {return}
+        
+        for contact in contacts {
+            context?.deleteObject(contact)
         }
     }
     
@@ -155,6 +186,11 @@ extension FavoritesViewController: UITableViewDelegate {
         let vc = CNContactViewController(forContact: cnContact)
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
+        contact.favorite = false
     }
     
 }
