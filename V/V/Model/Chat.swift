@@ -66,7 +66,7 @@ class Chat: NSManagedObject {
         let request = NSFetchRequest(entityName: "Chat")
         // set-up a predicate to constrain our request where we only get chat instances where the user
         // is the ONLY participant
-        request.predicate = NSPredicate(format: "ANY PARTICIPANT = %@ AND participants.@count = 1", contact)
+        request.predicate = NSPredicate(format: "ANY participants = %@ AND participants.@count = 1", contact)
         
         // do a do-catch to execute the request
         do {
