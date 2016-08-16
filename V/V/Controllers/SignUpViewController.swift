@@ -51,6 +51,19 @@ class SignUpViewController: UIViewController {
         stackView.spacing = 20
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            label.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor, constant: 20),
+            label.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+            stackView.topAnchor.constraintEqualToAnchor(label.bottomAnchor, constant: 20),
+            stackView.leadingAnchor.constraintEqualToAnchor(view.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraintEqualToAnchor(view.layoutMarginsGuide.trailingAnchor),
+            continueButton.topAnchor.constraintEqualToAnchor(stackView.bottomAnchor, constant: 20),
+            continueButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor)
+        ]
+        
+        NSLayoutConstraint.activateConstraints(constraints)
+        phoneNumberField.becomeFirstResponder()
     }
     
     
