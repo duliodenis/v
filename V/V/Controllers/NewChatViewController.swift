@@ -152,11 +152,8 @@ extension NewChatViewController: UITableViewDelegate {
         // confirm we have a valid context
         guard let context = context else { return }
         
-        // generate a new chat instance using the insertNewObjectForEntityForName method 
-        guard let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else { return }
-        
-        // add the contact as a participant in the chat
-        chat.add(participant: contact)
+        // see if a chat exists for the specified contact in the context otherwise create a new one
+        let chat = Chat.existing(directWith: contact, inContext: context) ?? Chat.new(directWith: contact, inContext: context)
         
         // call the ChatCreationDelegate created method
         chatCreationDelegate?.created(chat: chat, inContext: context)
