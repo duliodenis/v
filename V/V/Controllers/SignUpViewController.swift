@@ -9,27 +9,34 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-
+    
+    private let phoneNumberField = UITextField()
+    private let emailField = UITextField()
+    private let passwordField = UITextField()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        view.backgroundColor = UIColor.flatWhiteColor()
+        
+        let label = UILabel()
+        label.text = "Sign-Up to V"
+        label.font = UIFont(name: "AdventPro-Regular", size: 24)
+        
+        view.addSubview(label)
+        
+        let continueButton = UIButton()
+        continueButton.setTitle("Continue", forState: .Normal)
+        continueButton.setTitleColor(UIColor.flatBlackColor(), forState: .Normal)
+        continueButton.addTarget(self, action: "tappedContinue:", forControlEvents: .TouchUpInside)
+        
+        view.addSubview(continueButton)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tappedContinue(sender: UIButton) {
+        print("Continue Button Tapped")
     }
-    */
 
 }
