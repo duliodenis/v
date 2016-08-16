@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         tabController.viewControllers = viewControllers
-        window?.rootViewController = tabController
+        window?.rootViewController = SignUpViewController()
         
         return true
     }

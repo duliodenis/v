@@ -18,24 +18,30 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.flatWhiteColor()
+        view.backgroundColor = UIColor.flatPowderBlueColor()
         
         let label = UILabel()
-        label.text = "Sign-Up to V"
+        label.text = STRING_SIGNUP_TEXT
         label.font = UIFont(name: "AdventPro-Regular", size: 24)
+        label.textColor = UIColor.flatWhiteColor()
         
         view.addSubview(label)
         
-        let continueButton = UIButton()
+        let continueButton = CustomButton()
         continueButton.setTitle("Continue", forState: .Normal)
-        continueButton.setTitleColor(UIColor.flatBlackColor(), forState: .Normal)
+        continueButton.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
+        continueButton.titleLabel?.font = UIFont(name: "AdventPro-Regular", size: 24)
         continueButton.addTarget(self, action: "tappedContinue:", forControlEvents: .TouchUpInside)
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(continueButton)
         
         phoneNumberField.keyboardType = .PhonePad
+        phoneNumberField.textColor = UIColor.flatWhiteColor()
+        emailField.textColor = UIColor.flatWhiteColor()
+        passwordField.textColor = UIColor.flatWhiteColor()
+        
         label.translatesAutoresizingMaskIntoConstraints = false
-        continueButton.translatesAutoresizingMaskIntoConstraints = false
         
         let fields = [(phoneNumberField, "Phone Number"), (emailField, "Email"), (passwordField, "Password")]
         
@@ -59,7 +65,8 @@ class SignUpViewController: UIViewController {
             stackView.leadingAnchor.constraintEqualToAnchor(view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraintEqualToAnchor(view.layoutMarginsGuide.trailingAnchor),
             continueButton.topAnchor.constraintEqualToAnchor(stackView.bottomAnchor, constant: 20),
-            continueButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor)
+            continueButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor),
+            continueButton.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -75)
         ]
         
         NSLayoutConstraint.activateConstraints(constraints)

@@ -27,6 +27,8 @@
 		6C5415511D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */; };
 		6C5415531D633AA20034F8CF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415521D633AA20034F8CF /* SignUpViewController.swift */; };
 		6C5415551D633C390034F8CF /* UIColor+FlatColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415541D633C390034F8CF /* UIColor+FlatColors.swift */; };
+		6C5415571D63C6BF0034F8CF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415561D63C6BF0034F8CF /* CustomButton.swift */; };
+		6C5415591D63C7310034F8CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415581D63C7310034F8CF /* Constants.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
@@ -70,6 +72,8 @@
 		6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "Model/PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C5415521D633AA20034F8CF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Controllers/SignUpViewController.swift; sourceTree = "<group>"; };
 		6C5415541D633C390034F8CF /* UIColor+FlatColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+FlatColors.swift"; path = "Extensions/UIColor+FlatColors.swift"; sourceTree = "<group>"; };
+		6C5415561D63C6BF0034F8CF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = Views/CustomButton.swift; sourceTree = "<group>"; };
+		6C5415581D63C7310034F8CF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Infrastructure/Constants.swift; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			children = (
 				6C4CC5901CBC701C00905D99 /* Main.storyboard */,
 				6C4CC5951CBC701C00905D99 /* LaunchScreen.storyboard */,
+				6C5415561D63C6BF0034F8CF /* CustomButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			children = (
 				6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */,
 				6C4CC5981CBC701C00905D99 /* Info.plist */,
+				6C5415581D63C7310034F8CF /* Constants.swift */,
 			);
 			name = Infrastructure;
 			sourceTree = "<group>";
@@ -341,11 +347,13 @@
 				6CA5F0FB1D43A84E0054DD0F /* ContactSelector.swift in Sources */,
 				6C5415511D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift in Sources */,
 				6CA5F0F91D407A580054DD0F /* ContactsSearchResultsController.swift in Sources */,
+				6C5415591D63C7310034F8CF /* Constants.swift in Sources */,
 				6CBEFA471D0D8F1C00064D51 /* Message+CoreDataProperties.swift in Sources */,
 				6CA5F0FD1D4525140054DD0F /* ContextSyncManager.swift in Sources */,
 				6C4CC58D1CBC701C00905D99 /* AppDelegate.swift in Sources */,
 				6CBEF9B81CFB482E00064D51 /* UIViewController+FillViewWith.swift in Sources */,
 				6CA5F1001D470C9C0054DD0F /* FavoriteCell.swift in Sources */,
+				6C5415571D63C6BF0034F8CF /* CustomButton.swift in Sources */,
 				6CBEF9C21CFB788E00064D51 /* ChatCreationDelegate.swift in Sources */,
 				6CA5F0D71D2C6E0E0054DD0F /* ContactsViewController.swift in Sources */,
 				6C5415551D633C390034F8CF /* UIColor+FlatColors.swift in Sources */,
