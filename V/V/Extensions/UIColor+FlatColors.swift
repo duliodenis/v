@@ -69,7 +69,7 @@ extension UIColor {
     }
     
     class func flatPowderBlueColor() -> UIColor {
-        return UIColor(red: 222/255, green: 24/255, blue: 95/255, alpha: 1)
+        return UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1)
     }
     
     class func flatPurpleColor() -> UIColor {
@@ -97,7 +97,7 @@ extension UIColor {
     }
     
     class func flatWhiteColor() -> UIColor {
-        return UIColor(red: 192/255, green: 2/255, blue: 95/255, alpha: 1)
+        return UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1)
     }
     
     class func flatYellowColor() -> UIColor {
@@ -171,7 +171,7 @@ extension UIColor {
     }
     
     class func flatRedColorDark() -> UIColor {
-        return UIColor(red: 6/255, green: 78/255, blue: 75/255, alpha: 1)
+        return UIColor(red: 192/255, green: 57/255, blue: 43/255, alpha: 1)
     }
     
     class func flatSandColorDark() -> UIColor {
