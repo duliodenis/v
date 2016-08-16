@@ -6,4 +6,12 @@
 //  Copyright © 2016 Dulio Denis. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+// MARK: Colors
+
+let BUTTON_COLOR: UIColor = UIColor.flatRedColor()
+
+// MARK: Strings
+
+let STRING_SIGNUP_TEXT = "Sign-Up to V"
