@@ -58,4 +58,39 @@ class Chat: NSManagedObject {
         mutableSetValueForKey("participants").addObject(contact)
     }
     
+    
+    // static function to check for a chat instance that matches the contact being passed in
+    
+    static func existing(directWith contact: Contact, inContext context: NSManagedObjectContext) -> Chat? {
+        // generate a fetch request for our Chat instance
+        let request = NSFetchRequest(entityName: "Chat")
+        // set-up a predicate to constrain our request where we only get chat instances where the user
+        // is the ONLY participant
+        request.predicate = NSPredicate(format: "ANY PARTICIPANT = %@ AND participants.@count = 1", contact)
+        
+        // do a do-catch to execute the request
+        do {
+            // request returns an array of Chat instances
+            guard let results = try context.executeFetchRequest(request) as? [Chat] else {return nil}
+            // return the first item in the array of chat instances
+            return results.first
+        } catch {
+            print("Chat: Error fetching request.")
+        }
+        // if we made it this far return nil
+        return nil
+    }
+    
+    
+    // static function, callable on the Chat class, to generate new chat instances to Core Data
+    
+    static func new(directWith contact: Contact, inContext context: NSManagedObjectContext) -> Chat {
+        // create a new instance of Chat with the insert New Object For Entity Name method
+        let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as! Chat
+        // update the object by adding the contact as a participant
+        chat.add(participant: contact)
+        // return the newly created object
+        return chat
+    }
+    
 }
