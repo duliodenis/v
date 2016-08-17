@@ -75,7 +75,30 @@ class SignUpViewController: UIViewController {
     
     
     func tappedContinue(sender: UIButton) {
-        print("Continue Button Tapped")
+        guard let phoneNumber = phoneNumberField.text where phoneNumber.characters.count > 0 else {
+            alertForError(STRING_PHONE_NUMBER_ERROR)
+            return
+        }
+        
+        guard let email = emailField.text where email.characters.count > 0 else {
+            alertForError(STRING_EMAIL_ERROR)
+            return
+        }
+        
+        guard let password = passwordField.text where password.character.count >= 6 else {
+            alertForError(STRING_PASSWORD_ERROR)
+            return
+        }
+    }
+    
+    
+    private func alertForError(error: String) {
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }
