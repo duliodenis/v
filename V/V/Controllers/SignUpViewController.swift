@@ -23,18 +23,18 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.flatPowderBlueColor()
+        view.backgroundColor = UIColor.flatBlue()
         
         let label = UILabel()
         label.text = STRING_SIGNUP_TEXT
         label.font = UIFont(name: "AdventPro-Regular", size: 24)
-        label.textColor = UIColor.flatWhiteColor()
+        label.textColor = UIColor.flatWhite()
         
         view.addSubview(label)
         
         let continueButton = CustomButton()
         continueButton.setTitle("Continue", forState: .Normal)
-        continueButton.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
+        continueButton.setTitleColor(UIColor.flatWhite(), forState: .Normal)
         continueButton.titleLabel?.font = UIFont(name: "AdventPro-Regular", size: 24)
         continueButton.addTarget(self, action: "tappedContinue:", forControlEvents: .TouchUpInside)
         continueButton.translatesAutoresizingMaskIntoConstraints = false
@@ -42,9 +42,9 @@ class SignUpViewController: UIViewController {
         view.addSubview(continueButton)
         
         phoneNumberField.keyboardType = .PhonePad
-        phoneNumberField.textColor = UIColor.flatWhiteColor()
-        emailField.textColor = UIColor.flatWhiteColor()
-        passwordField.textColor = UIColor.flatWhiteColor()
+        phoneNumberField.textColor = UIColor.flatWhite()
+        emailField.textColor = UIColor.flatWhite()
+        passwordField.textColor = UIColor.flatWhite()
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
