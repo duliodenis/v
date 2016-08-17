@@ -14,6 +14,8 @@ class SignUpViewController: UIViewController {
     private let emailField = UITextField()
     private let passwordField = UITextField()
     
+    var remoteStore: RemoteStore?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,13 @@ class SignUpViewController: UIViewController {
             alertForError(STRING_PASSWORD_ERROR)
             return
         }
+        
+        remoteStore?.signUp(phoneNumber: phoneNumber, email: email, password: password, success: {
+            
+            }, error: {
+                errorString in
+                
+        })
     }
     
     
