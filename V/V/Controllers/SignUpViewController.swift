@@ -16,6 +16,9 @@ class SignUpViewController: UIViewController {
     
     var remoteStore: RemoteStore?
     
+    var contactImporter: ContactImporter?
+    var rootViewController: UIViewController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,9 +97,19 @@ class SignUpViewController: UIViewController {
         
         remoteStore?.signUp(phoneNumber: phoneNumber, email: email, password: password, success: {
             
+            guard let rootVC = self.rootViewController,
+                      remoteStore = self.remoteStore,
+                      contactImporter = self.contactImporter else {return}
+            
+            remoteStore.startSyncing()
+            contactImporter.fetch()
+            contactImporter.listenForChanges()
+            
+            self.presentViewController(rootVC, animated: true, completion: nil)
+            
             }, error: {
                 errorString in
-                
+                self.alertForError(errorString)
         })
     }
     
