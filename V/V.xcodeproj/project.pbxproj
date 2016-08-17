@@ -29,6 +29,7 @@
 		6C5415551D633C390034F8CF /* UIColor+FlatColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415541D633C390034F8CF /* UIColor+FlatColors.swift */; };
 		6C5415571D63C6BF0034F8CF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415561D63C6BF0034F8CF /* CustomButton.swift */; };
 		6C5415591D63C7310034F8CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415581D63C7310034F8CF /* Constants.swift */; };
+		6C54155B1D64BD930034F8CF /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C54155A1D64BD930034F8CF /* RemoteStore.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
@@ -74,6 +75,7 @@
 		6C5415541D633C390034F8CF /* UIColor+FlatColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+FlatColors.swift"; path = "Extensions/UIColor+FlatColors.swift"; sourceTree = "<group>"; };
 		6C5415561D63C6BF0034F8CF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = Views/CustomButton.swift; sourceTree = "<group>"; };
 		6C5415581D63C7310034F8CF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Infrastructure/Constants.swift; sourceTree = "<group>"; };
+		6C54155A1D64BD930034F8CF /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteStore.swift; path = Protocols/RemoteStore.swift; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				6CA5F0D41D2AEF2F0054DD0F /* ContextViewController.swift */,
 				6CA5F0D81D3004530054DD0F /* TableViewFetchedResultsDisplayer.swift */,
 				6CA5F0FA1D43A84E0054DD0F /* ContactSelector.swift */,
+				6C54155A1D64BD930034F8CF /* RemoteStore.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				6CBEF9B41CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift in Sources */,
 				6C27CE801CE8D13100C42FB4 /* Model.xcdatamodeld in Sources */,
 				6C3FEDA61D160E6100E76E8B /* Chat+CoreDataProperties.swift in Sources */,
+				6C54155B1D64BD930034F8CF /* RemoteStore.swift in Sources */,
 				6C3FEDA81D1612F200E76E8B /* NewGroupParticipantsViewController.swift in Sources */,
 				6C5415531D633AA20034F8CF /* SignUpViewController.swift in Sources */,
 				6CA4AF511CF3F5A900E683DE /* NewChatViewController.swift in Sources */,

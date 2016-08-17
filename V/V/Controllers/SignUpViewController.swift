@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        guard let password = passwordField.text where password.character.count >= 6 else {
+        guard let password = passwordField.text where password.characters.count >= 6 else {
             alertForError(STRING_PASSWORD_ERROR)
             return
         }
