@@ -36,6 +36,7 @@
 		6C54156C1D665A270034F8CF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156B1D665A270034F8CF /* CFNetwork.framework */; };
 		6C54156E1D665A660034F8CF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156D1D665A660034F8CF /* Security.framework */; };
 		6C5415701D665A740034F8CF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156F1D665A740034F8CF /* SystemConfiguration.framework */; };
+		6C5415721D665D790034F8CF /* FirebaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415711D665D790034F8CF /* FirebaseStore.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
@@ -88,6 +89,7 @@
 		6C54156B1D665A270034F8CF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6C54156D1D665A660034F8CF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6C54156F1D665A740034F8CF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6C5415711D665D790034F8CF /* FirebaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseStore.swift; path = Model/FirebaseStore.swift; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				6CBEFA451D0D8F1C00064D51 /* Message+CoreDataProperties.swift */,
 				6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */,
 				6CA5F0FC1D4525140054DD0F /* ContextSyncManager.swift */,
+				6C5415711D665D790034F8CF /* FirebaseStore.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			files = (
 				6CB57DF61CC58BFA00307103 /* UITableView+Scroll.swift in Sources */,
 				6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */,
+				6C5415721D665D790034F8CF /* FirebaseStore.swift in Sources */,
 				6CA5F0D91D3004530054DD0F /* TableViewFetchedResultsDisplayer.swift in Sources */,
 				6CA5F0D51D2AEF2F0054DD0F /* ContextViewController.swift in Sources */,
 				6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */,

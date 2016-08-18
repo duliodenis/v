@@ -19,3 +19,7 @@ let STRING_SIGNUP_TEXT = "Sign-Up to V"
 let STRING_PHONE_NUMBER_ERROR = "Please include your phone number."
 let STRING_EMAIL_ERROR = "Please include your email address."
 let STRING_PASSWORD_ERROR = "Password must be at least six characters."
+
+// MARK: URLS
+
+let FIREBASE_URL = "https://<YOUR-DB>.firebaseio.com"
