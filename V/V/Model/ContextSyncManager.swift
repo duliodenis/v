@@ -42,4 +42,15 @@ class ContextSyncManager: NSObject {
         })
     }
     
+    
+    private func objectsForKey(key: String, dictionary: NSDictionary, context: NSManagedObjectContext) -> [NSManagedObject] {
+        // unwrap the dictionary by getting the value using the key parameter 
+        // returning an empty array if there is no value
+        guard let set = (dictionary[key] as? NSSet) else {return []}
+        // if there are valid objects convert them to an arrayof NSManagedObjects
+        guard let objects = set.allObjects as? [NSManagedObject] else {return []}
+        // get the object from the context using the objectID attribute
+        return objects.map{context.objectWithID($0.objectID)}
+    }
+    
 }
