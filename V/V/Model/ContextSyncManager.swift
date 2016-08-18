@@ -15,6 +15,9 @@ class ContextSyncManager: NSObject {
     private var mainContext: NSManagedObjectContext
     private var backgroundContext: NSManagedObjectContext
     
+    var remoteStore: RemoteStore?
+    
+    
     init(mainContext: NSManagedObjectContext, backgroundContext: NSManagedObjectContext) {
         self.mainContext = mainContext
         self.backgroundContext = backgroundContext
@@ -31,7 +34,16 @@ class ContextSyncManager: NSObject {
     
     func mainContextSaved(notification: NSNotification) {
         backgroundContext.performBlock({
+            
+            let inserted = self.objectsForKey(NSInsertedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext)
+            
+            let updated = self.objectsForKey(NSUpdatedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext)
+            
+            let deleted = self.objectsForKey(NSDeletedObjectsKey, dictionary: notification.userInfo!, context: self.backgroundContext)
+            
             self.backgroundContext.mergeChangesFromContextDidSaveNotification(notification)
+            
+            self.remoteStore?.store(inserted: inserted, updated: updated, deleted: deleted)
         })
     }
     
