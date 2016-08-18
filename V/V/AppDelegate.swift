@@ -19,7 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // private optional context sync manager for Contact syncing
     private var contactsSyncer: ContextSyncManager?
-
+    
+    // private optional context sync manager for remote Contact syncing
+    private var contactsUploadSyncer: ContextSyncManager?
+    
+    // private optional context sync manager for Firebase syncing
+    private var firebaseSyncer: ContextSyncManager?
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
@@ -33,6 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         // setup the persistent store coordinator for the contacts context
         contactsContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
+        
+        // setup a Private Dispatch Queue Context for the Firebase Context to work in its own thread
+        let firebaseContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        // setup the persistent store coordinator for the Firebase context
+        firebaseContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
+        
+        // initialize contacts remote upload syncer with main context and firebase context
+        contactsUploadSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
+        
+        // initialize firebase remote syncer with main context and firebase context
+        firebaseSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
         
         // initialize contacts syncer with main context and contacts context
         contactsSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: contactsContext)
