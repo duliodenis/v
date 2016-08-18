@@ -50,6 +50,11 @@ class ContextSyncManager: NSObject {
     
     func backgroundContextSaved(notification: NSNotification) {
         mainContext.performBlock({
+            
+            // use objects for key to properly fault objects
+            self.objectsForKey(NSUpdatedObjectsKey, dictionary: notification.userInfo!, context: self.mainContext).forEach{$0.willAccessValueForKey(nil)
+            }
+            
             self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
         })
     }
