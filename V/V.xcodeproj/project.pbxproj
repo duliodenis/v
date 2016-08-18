@@ -30,6 +30,12 @@
 		6C5415571D63C6BF0034F8CF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415561D63C6BF0034F8CF /* CustomButton.swift */; };
 		6C5415591D63C7310034F8CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415581D63C7310034F8CF /* Constants.swift */; };
 		6C54155B1D64BD930034F8CF /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C54155A1D64BD930034F8CF /* RemoteStore.swift */; };
+		6C5415661D66598B0034F8CF /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5415651D66598B0034F8CF /* Firebase.framework */; };
+		6C5415681D6659F10034F8CF /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5415671D6659F10034F8CF /* libicucore.tbd */; };
+		6C54156A1D665A150034F8CF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5415691D665A150034F8CF /* libc++.tbd */; };
+		6C54156C1D665A270034F8CF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156B1D665A270034F8CF /* CFNetwork.framework */; };
+		6C54156E1D665A660034F8CF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156D1D665A660034F8CF /* Security.framework */; };
+		6C5415701D665A740034F8CF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C54156F1D665A740034F8CF /* SystemConfiguration.framework */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
@@ -76,6 +82,12 @@
 		6C5415561D63C6BF0034F8CF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = Views/CustomButton.swift; sourceTree = "<group>"; };
 		6C5415581D63C7310034F8CF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Infrastructure/Constants.swift; sourceTree = "<group>"; };
 		6C54155A1D64BD930034F8CF /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteStore.swift; path = Protocols/RemoteStore.swift; sourceTree = "<group>"; };
+		6C5415651D66598B0034F8CF /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Frameworks/Firebase.framework; sourceTree = "<group>"; };
+		6C5415671D6659F10034F8CF /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		6C5415691D665A150034F8CF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		6C54156B1D665A270034F8CF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6C54156D1D665A660034F8CF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6C54156F1D665A740034F8CF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
@@ -101,6 +113,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C5415701D665A740034F8CF /* SystemConfiguration.framework in Frameworks */,
+				6C54156E1D665A660034F8CF /* Security.framework in Frameworks */,
+				6C54156C1D665A270034F8CF /* CFNetwork.framework in Frameworks */,
+				6C54156A1D665A150034F8CF /* libc++.tbd in Frameworks */,
+				6C5415681D6659F10034F8CF /* libicucore.tbd in Frameworks */,
+				6C5415661D66598B0034F8CF /* Firebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +215,7 @@
 		6C4CC5A01CBC704800905D99 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				6C5415641D6659670034F8CF /* Frameworks */,
 				6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */,
 				6C4CC5981CBC701C00905D99 /* Info.plist */,
 				6C5415581D63C7310034F8CF /* Constants.swift */,
@@ -212,6 +231,19 @@
 				6C4CC5931CBC701C00905D99 /* Assets.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		6C5415641D6659670034F8CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C5415651D66598B0034F8CF /* Firebase.framework */,
+				6C54156F1D665A740034F8CF /* SystemConfiguration.framework */,
+				6C54156D1D665A660034F8CF /* Security.framework */,
+				6C54156B1D665A270034F8CF /* CFNetwork.framework */,
+				6C5415691D665A150034F8CF /* libc++.tbd */,
+				6C5415671D6659F10034F8CF /* libicucore.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6C5BFF821CBD3B6C00AF33FB /* Model */ = {
@@ -473,6 +505,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/V/Frameworks",
+				);
 				INFOPLIST_FILE = V/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.ddApps.v;
@@ -484,6 +520,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/V/Frameworks",
+				);
 				INFOPLIST_FILE = V/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.ddApps.v;
