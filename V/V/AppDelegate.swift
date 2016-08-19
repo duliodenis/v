@@ -48,15 +48,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup the persistent store coordinator for the Firebase context
         firebaseContext.persistentStoreCoordinator = CoreDataStack.sharedInstance.coordinator
         
-        // initialize contacts remote upload syncer with main context and firebase context
-        contactsUploadSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
-        
-        // initialize firebase remote syncer with main context and firebase context
-        firebaseSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
-        
         // initialize the Firebase Store
         let firebaseStore = FirebaseStore(context: firebaseContext)
         self.firebaseStore = firebaseStore
+        
+        // initialize contacts remote upload syncer with main context and firebase context
+        contactsUploadSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
+        contactsUploadSyncer?.remoteStore = firebaseStore
+        
+        // initialize firebase remote syncer with main context and firebase context
+        firebaseSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
+        firebaseSyncer?.remoteStore = firebaseStore
         
         // initialize contacts syncer with main context and contacts context
         contactsSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: contactsContext)
@@ -67,44 +69,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // call the import contacts with this private queue context (pre-Firebase)
         // importContacts(contactsContext)
         
+        // generate an instance of a tab bar controller
+        let tabController = UITabBarController()
+        
+        // set-up an array of tuple instances of view controller data
+        let vcData: [(UIViewController, UIImage, String)] = [
+            (FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"),
+            (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"),
+            (AllChatsViewController(), UIImage(named: "chat_icon")!, "Chats")
+        ]
+        
+        // use map closure method to create an array of UINavigationController instances
+        let viewControllers = vcData.map {
+            (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
+            // set-up the context of each ViewController using the ContextVC Protocol
+            if var vc = vc as? ContextViewController {
+                vc.context = mainContext
+            }
+            // for each nav controller we set its root VC
+            let nav = UINavigationController(rootViewController: vc)
+            // its image
+            nav.tabBarItem.image = image
+            // and its title
+            nav.title = title
+            // and return the NavController
+            return nav
+        }
+        
         if firebaseStore.hasAuth() {
+            firebaseStore.startSyncing()
+            
             // listen for changes
             contactImporter?.listenForChanges()
-            
-            // generate an instance of a tab bar controller
-            let tabController = UITabBarController()
-            
-            // set-up an array of tuple instances of view controller data
-            let vcData: [(UIViewController, UIImage, String)] = [
-                (FavoritesViewController(), UIImage(named: "favorites_icon")!, "Favorites"),
-                (ContactsViewController(), UIImage(named: "contact_icon")!, "Contacts"),
-                (AllChatsViewController(), UIImage(named: "chat_icon")!, "Chats")
-            ]
-            
-            // use map closure method to create an array of UINavigationController instances
-            let viewControllers = vcData.map {
-                (vc: UIViewController, image: UIImage, title: String) -> UINavigationController in
-                // set-up the context of each ViewController using the ContextVC Protocol
-                if var vc = vc as? ContextViewController {
-                    vc.context = mainContext
-                }
-                // for each nav controller we set its root VC
-                let nav = UINavigationController(rootViewController: vc)
-                // its image
-                nav.tabBarItem.image = image
-                // and its title
-                nav.title = title
-                // and return the NavController
-                return nav
-            }
             
             tabController.viewControllers = viewControllers
             window?.rootViewController = tabController
         } else {
-            window?.rootViewController = SignUpViewController()
+            let vc = SignUpViewController()
+            vc.remoteStore = firebaseStore
+            vc.rootViewController = tabController
+            vc.contactImporter = contactImporter
+            window?.rootViewController = vc
         }
-        
-
         
         return true
     }
