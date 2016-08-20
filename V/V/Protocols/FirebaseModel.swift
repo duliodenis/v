@@ -28,9 +28,20 @@ extension Contact: FirebaseModel {
             rootRef.childByAppendingPath("users").queryOrderedByChild("phoneNumber").queryEqualToValue(number.value).observeSingleEventOfType(.Value, withBlock: {
                 snapshot in
                 
+                guard let user = snapshot.value as? NSDictionary else {return}
+                
+                let uid = user.allKeys.first as? String
+                context.performBlock {
+                    self.storageID = uid
+                    number.registered = true
+                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print("Contact: FirebaseModel extension (Problem Saving)")
+                    }
+                }
             })
-            
-            
         }
     }
     
