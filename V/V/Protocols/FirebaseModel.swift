@@ -88,4 +88,33 @@ extension Chat: FirebaseModel {
             rootRef.childByAppendingPath("users/"+id+"/chats/"+ref.key).setValue(true)
         }
     }
+    
+}
+
+
+extension Message: FirebaseModel {
+    
+    func upload(rootRef: Firebase, context: NSManagedObjectContext) {
+        
+        // ensure the message's chat is on Firebase - if it is not then upload that now
+        if chat?.storageID == nil {
+            chat?.upload(rootRef, context: context)
+        }
+        
+        // generate a data dictionary with two key value pairs
+        let data = [
+            // the message
+            "message": text!,
+            // and the sender using the current phone number attribute
+            "sender" : FirebaseStore.currentPhoneNumber!
+        ]
+        
+        // create a guard statement to check our chat, timestamp and storage id attributes
+        guard let chat = chat, timestamp = timestamp, storageID = chat.storageID else {return}
+        // create a time stamp attribute using 100K to remove any decimals for Firebase
+        let timeInterval = String(Int(timestamp.timeIntervalSince1970 * 100000))
+        // set the ref path for the messages and using the time interval as the value
+        rootRef.childByAppendingPath("chats/"+storageID+"/messages/"+timeInterval).setValue(data)
+    }
+    
 }
