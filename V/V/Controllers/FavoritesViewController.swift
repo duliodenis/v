@@ -46,7 +46,8 @@ class FavoritesViewController: UIViewController, TableViewFetchedResultsDisplaye
             
             // constrain the request with a predicate that only pulls contact instances
             // where the favorite attribute is true
-            request.predicate = NSPredicate(format: "favorite = true")
+            // and are only available in Firebase (ie: having storageIDs)
+            request.predicate = NSPredicate(format: "storageID != nil AND favorite = true")
             
             // set-up sort descriptors for last name and first name
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true),
