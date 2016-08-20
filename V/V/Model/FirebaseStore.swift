@@ -41,6 +41,31 @@ class FirebaseStore {
         model.upload(rootRef, context: context)
     }
     
+    
+    private func fetchAppContacts() -> [Contact] {
+        
+        // use a do-catch statement to make a request for our Contact instances
+        do {
+            // set-up a fetch request for Contact instances
+            let request = NSFetchRequest(entityName: "Contact")
+            // constrain the results to those in Firebase
+            request.predicate = NSPredicate(format: "storageID != nil")
+            
+            // get results back by executing the fetch request
+            if let results = try self.context.executeFetchRequest(request) as? [Contact] {
+                // and returning the results as an array of Contact instances
+                return results
+            }
+            
+        // otherwise print an error
+        } catch {
+            print("Firebase Store error fetching App Contacts.")
+        }
+        
+        // and return an empty array
+        return []
+    }
+    
 }
 
 extension FirebaseStore: RemoteStore {
