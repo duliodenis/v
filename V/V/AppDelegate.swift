@@ -96,13 +96,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return nav
         }
         
+        tabController.viewControllers = viewControllers
+        
         if firebaseStore.hasAuth() {
             firebaseStore.startSyncing()
             
             // listen for changes
             contactImporter?.listenForChanges()
             
-            tabController.viewControllers = viewControllers
             window?.rootViewController = tabController
         } else {
             let vc = SignUpViewController()
