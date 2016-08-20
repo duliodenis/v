@@ -52,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firebaseStore = FirebaseStore(context: firebaseContext)
         self.firebaseStore = firebaseStore
         
-        // initialize contacts remote upload syncer with main context and firebase context
-        contactsUploadSyncer = ContextSyncManager(mainContext: mainContext, backgroundContext: firebaseContext)
+        // initialize contacts remote upload syncer with Contacts context and firebase context
+        contactsUploadSyncer = ContextSyncManager(mainContext: contactsContext, backgroundContext: firebaseContext)
         contactsUploadSyncer?.remoteStore = firebaseStore
         
         // initialize firebase remote syncer with main context and firebase context
