@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
         
         let continueButton = CustomButton()
         continueButton.setTitle("Continue", forState: .Normal)
-        continueButton.setTitleColor(UIColor.flatWhite(), forState: .Normal)
+        continueButton.setTitleColor(BUTTON_TITLE_COLOR, forState: .Normal)
         continueButton.titleLabel?.font = UIFont(name: "AdventPro-Regular", size: 24)
         continueButton.addTarget(self, action: "tappedContinue:", forControlEvents: .TouchUpInside)
         continueButton.translatesAutoresizingMaskIntoConstraints = false

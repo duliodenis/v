@@ -25,7 +25,7 @@ class CustomButton: UIButton {
     }
     
     func setupView() {
-        layer.cornerRadius = 4.0
+        layer.cornerRadius = 20.0
         backgroundColor = BUTTON_COLOR
         setTitleColor(BUTTON_TITLE_COLOR, forState: .Normal)
     }

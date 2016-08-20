@@ -10,8 +10,8 @@ import UIKit
 
 // MARK: Colors
 
-let BUTTON_COLOR: UIColor = UIColor.flatRed()
-let BUTTON_TITLE_COLOR: UIColor = UIColor.flatWhite()
+let BUTTON_COLOR: UIColor = UIColor.flatWhite()
+let BUTTON_TITLE_COLOR: UIColor = UIColor.flatBlack()
 
 // MARK: Strings
 
