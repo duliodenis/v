@@ -15,7 +15,7 @@ class FirebaseStore {
     private let context: NSManagedObjectContext
     private let rootRef = Firebase(url: FIREBASE_URL)
     
-    private var currentPhoneNumber: String? {
+    private(set) static var currentPhoneNumber: String? {
         set(phoneNumber) {
             NSUserDefaults.standardUserDefaults().setObject(phoneNumber, forKey:"phoneNumber")
         }
@@ -52,6 +52,12 @@ extension FirebaseStore: RemoteStore {
     
     func store(inserted inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
         inserted.forEach(upload)
+        
+        do {
+            try context.save()
+        } catch {
+            print("FirebaseStore: RemoteStore error saving.")
+        }
     }
     
     
@@ -70,7 +76,7 @@ extension FirebaseStore: RemoteStore {
                 ]
                 
                 // update our current phone number to persist in NSUserDefaults
-                self.currentPhoneNumber = phoneNumber
+                FirebaseStore.currentPhoneNumber = phoneNumber
                 // get our Unique ID from the result
                 let uid = result["uid"] as! String
                 // set the rootRef/users/uid value = newUser

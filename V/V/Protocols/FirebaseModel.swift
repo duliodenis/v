@@ -44,5 +44,48 @@ extension Contact: FirebaseModel {
             })
         }
     }
+}
+
+
+extension Chat: FirebaseModel {
     
+    func upload(rootRef: Firebase, context: NSManagedObjectContext) {
+        // confirm the storageID is nil - meaning its not on Firebase
+        guard storageID == nil else {return}
+        // create a ref for our chats using a new location to store the keypath
+        let ref = rootRef.childByAppendingPath("chats").childByAutoId()
+        // update the storageID to use the ref key
+        storageID = ref.key
+        
+        // set-up a data dictionary using id as the key and the ref.key as the value
+        var data: [String:AnyObject] = [
+            "id": ref.key,
+        ]
+        
+        // get our participants into an array
+        guard let participants = participants?.allObjects as? [Contact] else {return}
+        // get phone numbers
+        var numbers = [FirebaseStore.currentPhoneNumber!: true]
+        // and an array of user ids
+        var userIDs = [rootRef.authData.uid]
+        
+        for participant in participants {
+            guard let phoneNumbers = participant.phoneNumbers?.allObjects as? [PhoneNumber] else {continue}
+            guard let number = phoneNumbers.filter({$0.registered}).first else {continue}
+            numbers[number.value!] = true
+            userIDs.append(participant.storageID!)
+        }
+        
+        data["participants"] = numbers
+        
+        if let name = name {
+            data["name"] = name
+        }
+        
+        ref.setValue(["meta": data])
+        
+        for id in userIDs {
+            rootRef.childByAppendingPath("users/"+id+"/chats/"+ref.key).setValue(true)
+        }
+    }
 }
