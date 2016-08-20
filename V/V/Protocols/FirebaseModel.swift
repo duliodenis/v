@@ -44,6 +44,33 @@ extension Contact: FirebaseModel {
             })
         }
     }
+    
+    
+    func observeStatus(rootRef: Firebase, context: NSManagedObjectContext) {
+        // create a Firebase location for the user using the storage ID
+        // specifying we want to look at the status
+        // for the observation we specify we want to observe changes to the value
+        // when there is a change to this value the block will fire
+        rootRef.childByAppendingPath("users/"+storageID!+"/status").observeEventType(.Value, withBlock: {
+            snapshot in
+            // we get the status back using the snapshot value attribute
+            // and confirm its a String
+            guard let status = snapshot.value as? String else {return}
+            
+            // update our status inside a perform block for safety
+            context.performBlock {
+                self.status = status
+                
+                do {
+                    // save the update to Core Data
+                    try context.save()
+                } catch {
+                    print("Contact Observing Status Error Saving.")
+                }
+            }
+        })
+    }
+    
 }
 
 
