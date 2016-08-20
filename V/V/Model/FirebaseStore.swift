@@ -15,13 +15,26 @@ class FirebaseStore {
     private let context: NSManagedObjectContext
     private let rootRef = Firebase(url: FIREBASE_URL)
     
+    private var currentPhoneNumber: String? {
+        set(phoneNumber) {
+            NSUserDefaults.standardUserDefaults().setObject(phoneNumber, forKey:"phoneNumber")
+        }
+
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey("phoneNumber") as? String
+        }
+    }
+    
+    
     init(context: NSManagedObjectContext) {
         self.context = context
     }
     
+    
     func hasAuth() -> Bool {
         return rootRef.authData != nil
     }
+    
 }
 
 extension FirebaseStore: RemoteStore {
