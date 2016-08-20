@@ -49,8 +49,39 @@ extension FirebaseStore: RemoteStore {
     }
     
     
-    func signUp(phoneNumber phoneNumber: String, email: String, password: String, success: () -> (), error: (errorMessage: String) -> ()) {
+    func signUp(phoneNumber phoneNumber: String, email: String, password: String, success: () -> (), error errorCallback: (errorMessage: String) -> ()) {
         
+        rootRef.createUser(email, password: password, withValueCompletionBlock: {
+            error, result in
+            
+            if error != nil {
+                errorCallback(errorMessage: error.description)
+            } else {
+                
+                // generate a new user with a key-value pair of a phone number
+                let newUser = [
+                    "phoneNumber": phoneNumber
+                ]
+                
+                // update our current phone number to persist in NSUserDefaults
+                self.currentPhoneNumber = phoneNumber
+                // get our Unique ID from the result
+                let uid = result["uid"] as! String
+                // set the rootRef/users/uid value = newUser
+                self.rootRef.childByAppendingPath("users").childByAppendingPath(uid).setValue(newUser)
+                // and authenticate the user
+                self.rootRef.authUser(email, password: password, withCompletionBlock: {
+                    error, authData in
+                    
+                    if error != nil {
+                        errorCallback(errorMessage: error.description)
+                    } else {
+                        success()
+                    }
+                })
+            }
+            
+        })
     }
     
 }
