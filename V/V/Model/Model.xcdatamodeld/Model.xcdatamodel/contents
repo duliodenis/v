@@ -12,6 +12,7 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storageID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="participants" inverseEntity="Chat" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
         <relationship name="phoneNumbers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhoneNumber" inverseName="contact" inverseEntity="PhoneNumber" syncable="YES"/>
@@ -30,7 +31,7 @@
     </entity>
     <elements>
         <element name="Chat" positionX="-54" positionY="18" width="128" height="105"/>
-        <element name="Contact" positionX="-54" positionY="27" width="128" height="165"/>
+        <element name="Contact" positionX="-54" positionY="27" width="128" height="180"/>
         <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="PhoneNumber" positionX="-54" positionY="54" width="128" height="105"/>
     </elements>
