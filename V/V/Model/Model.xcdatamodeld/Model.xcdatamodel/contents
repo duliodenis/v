@@ -3,6 +3,7 @@
     <entity name="Chat" representedClassName=".Chat" syncable="YES">
         <attribute name="lastMessageTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storageID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
         <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="chats" inverseEntity="Contact" syncable="YES"/>
     </entity>
@@ -30,7 +31,7 @@
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="phoneNumbers" inverseEntity="Contact" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="Chat" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="Contact" positionX="-54" positionY="27" width="128" height="180"/>
         <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="PhoneNumber" positionX="-54" positionY="54" width="128" height="105"/>

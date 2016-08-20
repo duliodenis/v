@@ -2,7 +2,7 @@
 //  Chat+CoreDataProperties.swift
 //  V
 //
-//  Created by Dulio Denis on 6/18/16.
+//  Created by Dulio Denis on 8/20/16.
 //  Copyright © 2016 Dulio Denis. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,6 +16,7 @@ extension Chat {
 
     @NSManaged var lastMessageTime: NSDate?
     @NSManaged var name: String?
+    @NSManaged var storageID: String?
     @NSManaged var messages: NSSet?
     @NSManaged var participants: NSSet?
 

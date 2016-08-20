@@ -16,7 +16,6 @@
 		6C27CE901CEBC2B000C42FB4 /* AdventPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27CE8F1CEBC2B000C42FB4 /* AdventPro-Regular.ttf */; };
 		6C27CE921CEBC50F00C42FB4 /* AllChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */; };
 		6C3FEDA41D15D85700E76E8B /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FEDA31D15D85700E76E8B /* NewGroupViewController.swift */; };
-		6C3FEDA61D160E6100E76E8B /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FEDA51D160E6100E76E8B /* Chat+CoreDataProperties.swift */; };
 		6C3FEDA81D1612F200E76E8B /* NewGroupParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FEDA71D1612F200E76E8B /* NewGroupParticipantsViewController.swift */; };
 		6C4CC58D1CBC701C00905D99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */; };
 		6C4CC5921CBC701C00905D99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4CC5901CBC701C00905D99 /* Main.storyboard */; };
@@ -38,6 +37,7 @@
 		6C5415721D665D790034F8CF /* FirebaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415711D665D790034F8CF /* FirebaseStore.swift */; };
 		6C5415741D6886F50034F8CF /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415731D6886F50034F8CF /* FirebaseModel.swift */; };
 		6C5415761D688DAD0034F8CF /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415751D688DAD0034F8CF /* Contact+CoreDataProperties.swift */; };
+		6C5415781D68E0430034F8CF /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5415771D68E0430034F8CF /* Chat+CoreDataProperties.swift */; };
 		6C576B0A1CBE9F200054447A /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C576B091CBE9F200054447A /* MessageCell.swift */; };
 		6C5D73A31D1B087700BDA857 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A21D1B087700BDA857 /* ContactImporter.swift */; };
 		6C5D73AB1D20283E00BDA857 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */; };
@@ -68,7 +68,6 @@
 		6C27CE8F1CEBC2B000C42FB4 /* AdventPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AdventPro-Regular.ttf"; path = "Fonts/AdventPro-Regular.ttf"; sourceTree = "<group>"; };
 		6C27CE911CEBC50F00C42FB4 /* AllChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllChatsViewController.swift; path = Controllers/AllChatsViewController.swift; sourceTree = "<group>"; };
 		6C3FEDA31D15D85700E76E8B /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupViewController.swift; path = Controllers/NewGroupViewController.swift; sourceTree = "<group>"; };
-		6C3FEDA51D160E6100E76E8B /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Chat+CoreDataProperties.swift"; path = "Model/Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C3FEDA71D1612F200E76E8B /* NewGroupParticipantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupParticipantsViewController.swift; path = Controllers/NewGroupParticipantsViewController.swift; sourceTree = "<group>"; };
 		6C4CC5891CBC701C00905D99 /* V.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C4CC58C1CBC701C00905D99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +91,7 @@
 		6C5415711D665D790034F8CF /* FirebaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseStore.swift; path = Model/FirebaseStore.swift; sourceTree = "<group>"; };
 		6C5415731D6886F50034F8CF /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseModel.swift; path = Protocols/FirebaseModel.swift; sourceTree = "<group>"; };
 		6C5415751D688DAD0034F8CF /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "Model/Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6C5415771D68E0430034F8CF /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Chat+CoreDataProperties.swift"; path = "Model/Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6C576B091CBE9F200054447A /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		6C5D73A21D1B087700BDA857 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactImporter.swift; path = Model/ContactImporter.swift; sourceTree = "<group>"; };
 		6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = Model/PhoneNumber.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 				6CA4AF241CF118A900E683DE /* Contact.swift */,
 				6C5D73A81D20283E00BDA857 /* PhoneNumber.swift */,
 				6C27CE7E1CE8D13100C42FB4 /* Model.xcdatamodeld */,
-				6C3FEDA51D160E6100E76E8B /* Chat+CoreDataProperties.swift */,
+				6C5415771D68E0430034F8CF /* Chat+CoreDataProperties.swift */,
 				6C5415751D688DAD0034F8CF /* Contact+CoreDataProperties.swift */,
 				6CBEFA451D0D8F1C00064D51 /* Message+CoreDataProperties.swift */,
 				6C54154F1D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift */,
@@ -372,7 +372,6 @@
 				6C27CE8C1CE9210200C42FB4 /* ChatCell.swift in Sources */,
 				6CBEF9B41CFA3E7300064D51 /* TableViewFetchedResultsDelegate.swift in Sources */,
 				6C27CE801CE8D13100C42FB4 /* Model.xcdatamodeld in Sources */,
-				6C3FEDA61D160E6100E76E8B /* Chat+CoreDataProperties.swift in Sources */,
 				6C54155B1D64BD930034F8CF /* RemoteStore.swift in Sources */,
 				6C3FEDA81D1612F200E76E8B /* NewGroupParticipantsViewController.swift in Sources */,
 				6C5415531D633AA20034F8CF /* SignUpViewController.swift in Sources */,
@@ -389,6 +388,7 @@
 				6CA5F0FB1D43A84E0054DD0F /* ContactSelector.swift in Sources */,
 				6C5415761D688DAD0034F8CF /* Contact+CoreDataProperties.swift in Sources */,
 				6C5415511D60D63A0034F8CF /* PhoneNumber+CoreDataProperties.swift in Sources */,
+				6C5415781D68E0430034F8CF /* Chat+CoreDataProperties.swift in Sources */,
 				6CA5F0F91D407A580054DD0F /* ContactsSearchResultsController.swift in Sources */,
 				6C5415591D63C7310034F8CF /* Constants.swift in Sources */,
 				6C5415741D6886F50034F8CF /* FirebaseModel.swift in Sources */,
